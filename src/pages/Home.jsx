@@ -2,7 +2,11 @@
 import React from "react";
 
 function Home() {
-  return <h2 className="text-center my-5">Welcome to the Home Page!</h2>;
+  return (
+    <div className="container-md d-md-flex justify-content-center">
+      <h1>Home</h1>
+    </div>
+  )
 }
 
 export default Home;
