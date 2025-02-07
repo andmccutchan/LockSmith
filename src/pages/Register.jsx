@@ -1,8 +1,13 @@
 // Register.jsx
 import React from "react";
+import SignUpCard from "../components/SignUpCard";
 
 function Home() {
-  return <h2 className="text-center my-5">Welcome to the Register Page!</h2>;
+  return (
+    <div>
+      <SignUpCard />
+    </div>
+  );
 }
 
 export default Home;
