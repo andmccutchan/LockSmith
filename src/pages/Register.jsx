@@ -1,5 +1,5 @@
 // Register.jsx
-import React from "react";
+import React, { useState } from "react";
 import SignUpCard from "../components/SignUpCard";
 
 function Home() {
