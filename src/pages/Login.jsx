@@ -5,7 +5,7 @@ import LoginCard from "../components/LoginCard";
 function Home() {
   return (
     <div>
-      <h2 className="text-center my-5">Welcome to PassWorks! Please log in</h2>
+      <h2 className="text-center my-5">Good to see you again!</h2>
       <LoginCard />
     </div>
   )

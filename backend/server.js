@@ -22,3 +22,9 @@ mongoose.connect(process.env.MONGODB_URI)
 app.use("/api/auth", authRoutes);
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+app.post("/api/auth/register", (req, res) => {
+    console.log("Received request:", req.body);
+    res.json({ message: "User registered!" });
+  });
+  
