@@ -13,6 +13,7 @@ function SignUpCard() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log(user)
         try {
             const res = await axios.post("http://localhost:5001/api/auth/register", user);
             console.log(res.data);
