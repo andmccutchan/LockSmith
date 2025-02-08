@@ -1,26 +1,24 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router'
-import API from '../api';
 
 function SignUpCard() {
-    const [formData, setFormData] = useState({
-        username:"",
-        password:""
-    });
+    const [user, setUser] = useState({email: "", username: "", password: ""})
+    const [error, setError] = useState("");
+    const navigate = useNavigate(); 
 
     const handleChange = (e) => {
-        setFormData({...formData, [e.target.name]: e.target.value});
+        setUser({...user, [e.target.name]: e.target.value });
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await API.post("/register", formData);
-            console.log("Response:", response.data);
-            alert("User registered successfully");
+            const res = await axios.post("http://localhost:5001/api/auth/register", user);
+            console.log(res.data);
+            navigate("/login");
         } catch (err) {
-            console.error("Error registering user:", err.response?.data || err);
+            setError(err.response?.data?.message || "Registration failed")
         }
     }
 
@@ -30,10 +28,6 @@ function SignUpCard() {
         <form onSubmit={handleSubmit} className='card p-3 mx-auto w-25 bg-dark text-light my-5 py-4'>
             <div>
                 <h2 className='text-center my-2'>Create an account</h2>
-            </div>
-            <div className="mb-3">
-                <label htmlFor="userEmail" className="form-label">Email</label>
-                <input type="email" name='email' className="form-control" id="userEmail" placeholder="name@example.com" onChange={handleChange} required />
             </div>
             <div className="mb-3">
                 <label htmlFor="username" className="form-label">Username</label>

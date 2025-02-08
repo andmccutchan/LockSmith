@@ -1,5 +1,5 @@
 import express from "express";
-import bcrypt, { genSalt } from "bcryptjs";
+import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken"
 import User from "../models/User.js";
 import dotenv from "dotenv";
@@ -27,14 +27,14 @@ router.post("/register", (req, res) => {
 });
 
 // Login user
-router.post("/login", (req, res) => {
+router.post("/login", async (req, res) => {
     const { username, password } = req.body;
 
     try {
-        const user = User.findOne({username});
+        const user = await User.findOne({username});
         if (!user) return res.status(400).json({error: "User not found"});
 
-        const isMatch = bcrypt.compare(password, user.password); 
+        const isMatch = await bcrypt.compare(password, user.password); 
         if (!isMatch) return res.status(400).json({error: "Password does not match"});
 
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1h"});
