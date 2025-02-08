@@ -1,24 +1,26 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router'
+import API from '../api';
 
 function SignUpCard() {
-    const [user, setUser] = useState({email: "", username: "", password: ""})
-    const [error, setError] = useState("");
-    const navigate = useNavigate(); 
+    const [formData, setFormData] = useState({
+        username:"",
+        password:""
+    });
 
     const handleChange = (e) => {
-        setUser({...user, [e.target.name]: e.target.value });
+        setFormData({...formData, [e.target.name]: e.target.value});
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post("http://localhost:5001/api/auth/register", user);
-            console.log(res.data);
-            navigate("/login");
+            const response = await API.post("/register", formData);
+            console.log("Response:", response.data);
+            alert("User registered successfully");
         } catch (err) {
-            setError(err.response?.data?.message || "Registration failed")
+            console.error("Error registering user:", err.response?.data || err);
         }
     }
 
@@ -34,8 +36,8 @@ function SignUpCard() {
                 <input type="email" name='email' className="form-control" id="userEmail" placeholder="name@example.com" onChange={handleChange} required />
             </div>
             <div className="mb-3">
-                <label htmlFor="user" className="form-label">Username</label>
-                <input type="text" name='username' className="form-control" id="user" placeholder="Username" onChange={handleChange} required />
+                <label htmlFor="username" className="form-label">Username</label>
+                <input type="text" name='username' className="form-control" id="usernames" placeholder="Username" onChange={handleChange} required />
             </div>
             <div>
                 <label htmlFor="inputPassword5" className="form-label">Password</label>

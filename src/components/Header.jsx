@@ -12,7 +12,7 @@ function Header() {
         <div className="container-fluid">
           <Link className="navbar-brand d-flex" to="/" >
             <img className="px-1" src="src/assets/lock-closed-svgrepo-com.svg" alt="Lock logo" />
-            PassWorks
+            Lock<span className="text-primary">Smith</span>
           </Link>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>

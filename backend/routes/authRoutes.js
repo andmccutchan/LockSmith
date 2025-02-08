@@ -1,5 +1,5 @@
 import express from "express";
-import bcrypt from "bcryptjs";
+import bcrypt, { genSalt } from "bcryptjs";
 import jwt from "jsonwebtoken"
 import User from "../models/User.js";
 import dotenv from "dotenv";
@@ -9,43 +9,55 @@ dotenv.config();
 const router = express.Router();
 
 //Register User
-router.post("/register", async (req, res) => {
+router.post("/register", (req, res) => {
+    const { username, password, email } = req.body;
+    const saltRounds = 10;
+
     try {
-        const {username, email, password} = req.body;
+        const salt = bcrypt.genSalt(saltRounds);
+        const hashedPassword = bcrypt.hash(password, salt);
 
-        //Hash password
-        const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(password, salt);
-
-        //Create Password
-        const newUser = new User({username, email, password: hashedPassword});
-        await newUser.save();
-
-        res.status(201).json({message: "User Registered Successfully"});
-    } catch (error) {
-        res.status(500).json({message: "Server error"});
+        const newUser = new User({ username, password: hashedPassword, email});
+        newUser.save();
+        
+        res.json({message: "User Registered!"});
+    } catch (err) {
+        res.status(500).json({ error: err.message });
     }
 });
 
-//Login User
-router.post("/login", async (req, res) => {
+// Login user
+router.post("/login", (req, res) => {
+    const { username, password } = req.body;
+
     try {
-        const {email, password} = req.body;
+        const user = User.findOne({username});
+        if (!user) return res.status(400).json({error: "User not found"});
 
-        const user = await User.findOne({email});
-        if (!user) return res.status(400).json({message: "Invalid credentials"});
+        const isMatch = bcrypt.compare(password, user.password); 
+        if (!isMatch) return res.status(400).json({error: "Password does not match"});
 
-        //Check Password
-        const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch) return res.status(400).json({message: "Invalid credentials"});
+        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1h"});
 
-        //Generate JWT token
-        const token = jwt.sign({userId: user._id}, process.env.JWT_SECRET, {expiresIn: "1h"});
-
-        res.json({token, userId: user._id});
-    } catch (error) {
-        res.status(500).json({message: "Error connecting to server"});
+        res.json({token, user});
+    } catch (err) {
+        res.status(500).json({error: err.message});
     }
 });
+
+const authMiddleware = (req, res, next) => {
+    const token = req.header("Authorization");
+    if (!token) return res.status(401).json({error: "Access Denied"});
+
+    try {
+        const verified = jwt.verify(token, process.env.JWT_SECRET);
+        req.user = verified;
+        next();
+    } catch (err) {
+        res.status(400).json({error: "Invalid Token"});
+    }
+}
+
+
 
 export default router;
