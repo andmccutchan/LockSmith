@@ -9,18 +9,27 @@ dotenv.config();
 const router = express.Router();
 
 //Register User
-router.post("/register", (req, res) => {
-    const { username, password, email } = req.body;
-    const saltRounds = 10;
-
+router.post("/register", async (req, res) => {
     try {
-        const salt = bcrypt.genSalt(saltRounds);
-        const hashedPassword = bcrypt.hash(password, salt);
+        const { email, password } = req.body;
+        const saltRounds = 10;
 
-        const newUser = new User({ username, password: hashedPassword, email});
-        newUser.save();
+        if (!email || !password) {
+            return res.status(400).json({error: "Email and password are required"});
+        }
+
+        const existingUser = await User.findOne({email});
+        if (existingUser) {
+            return res.status(400).json({error: "Email already in use"});
+        }
+
+        const salt = await bcrypt.genSalt(saltRounds);
+        const hashedPassword = await bcrypt.hash(password, salt);
+
+        const newUser = new User({ email, password: hashedPassword});
+        await newUser.save();
         
-        res.json({message: "User Registered!"});
+        res.status(201).json({message: "User Registered!"});
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
@@ -28,10 +37,10 @@ router.post("/register", (req, res) => {
 
 // Login user
 router.post("/login", async (req, res) => {
-    const { username, password } = req.body;
+    const { email, password } = req.body;
 
     try {
-        const user = await User.findOne({username});
+        const user = await User.findOne({email});
         if (!user) return res.status(400).json({error: "User not found"});
 
         const isMatch = await bcrypt.compare(password, user.password); 

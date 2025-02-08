@@ -3,7 +3,7 @@ import axios from 'axios'
 import { useNavigate } from 'react-router'
 
 function SignUpCard() {
-    const [user, setUser] = useState({email: "", username: "", password: ""})
+    const [user, setUser] = useState({email: "", password: ""});
     const [error, setError] = useState("");
     const navigate = useNavigate(); 
 
@@ -24,18 +24,18 @@ function SignUpCard() {
 
   return (
     <div>
-        <form onSubmit={handleSubmit} className='card p-3 mx-auto w-25 bg-dark text-light my-5 py-4'>
+        <form onSubmit={handleSubmit} className='card p-3 mx-auto w-25 bg-body-tertiary text-dark my-5 py-4'>
             <div>
                 <h2 className='text-center my-2'>Create an account</h2>
             </div>
             <div className="mb-3">
-                <label htmlFor="username" className="form-label">Username</label>
-                <input type="text" name='username' className="form-control" id="usernames" placeholder="Username" onChange={handleChange} required />
+                <label htmlFor="userEmail" className="form-label">Email</label>
+                <input type="email" name='email' value={user.email} className="form-control" id="userEmail" placeholder="your-email@example.com" onChange={handleChange} required />
             </div>
             <div>
                 <label htmlFor="inputPassword5" className="form-label">Password</label>
-                <input type="password" name='password' id="inputPassword5" className="form-control" aria-describedby="passwordHelpBlock" onChange={handleChange} placeholder='Password' required />
-                <div id="passwordHelpBlock" className="form-text text-light">
+                <input type="password" name='password' value={user.password} id="inputPassword5" className="form-control" aria-describedby="passwordHelpBlock" onChange={handleChange} placeholder='Password' required />
+                <div id="passwordHelpBlock" className="form-text text-dark">
                     Your password must be 8-20 characters long
                 </div>
             </div>
