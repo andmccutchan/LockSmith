@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import { useNavigate } from 'react-router'
+import { useNavigate, Link } from 'react-router'
+import { set } from 'mongoose';
 
 function SignUpCard() {
     const [user, setUser] = useState({email: "", password: ""});
@@ -15,11 +16,17 @@ function SignUpCard() {
         e.preventDefault();
         console.log(user)
         try {
-            const res = await axios.post("http://localhost:5001/api/auth/register", user);
-            console.log(res.data);
-            navigate("/login");
+            if (user.password.length >= 8 && user.password.length <= 20) {
+                const res = await axios.post("http://localhost:5001/api/auth/register", user);
+                console.log(res.data);
+                navigate("/login");
+            } else if (user.password.length < 8) {
+                setError("Password must be at least 8 characters");
+            } else if (user.password.length > 20) {
+                setError("Password must be less than 20 characters");
+            }
         } catch (err) {
-            setError(err.response?.data?.message || "Registration failed")
+            setError(err.response?.data?.error || "Registration failed")
         }
     }
 
@@ -43,6 +50,7 @@ function SignUpCard() {
             {error && <span className='badge text-bg-danger text-center py-2 my-3'>{error}</span>}
             <button type="submit" className="btn btn-primary mt-2">Sign Up</button>
         </form>
+        <p className='form-text text-center'>Already have an account? <span><Link to="/login">Log in</Link></span></p>
     </div>
   )
 }

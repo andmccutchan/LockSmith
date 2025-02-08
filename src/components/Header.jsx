@@ -1,10 +1,17 @@
 // Header.jsx
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router";
 
 function Header() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const [currentPage, setCurrentPage] = useState("/");
+  useEffect(() => {
+    const isAuthenticated = !!localStorage.getItem("token");
+    if (isAuthenticated) {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
 
   return (
     <header>
