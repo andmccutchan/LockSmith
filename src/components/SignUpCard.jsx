@@ -24,7 +24,6 @@ function SignUpCard() {
 
   return (
     <div>
-        {error && <p className='text-danger'>{error}</p>}
         <form onSubmit={handleSubmit} className='card p-3 mx-auto w-25 bg-dark text-light my-5 py-4'>
             <div>
                 <h2 className='text-center my-2'>Create an account</h2>
@@ -40,7 +39,8 @@ function SignUpCard() {
                     Your password must be 8-20 characters long
                 </div>
             </div>
-            <button type="submit" className="btn btn-secondary mt-3">Sign Up</button>
+            {error && <span className='badge text-bg-danger text-center py-2 my-3'>{error}</span>}
+            <button type="submit" className="btn btn-primary mt-2">Sign Up</button>
         </form>
     </div>
   )

@@ -3,7 +3,7 @@ import React from 'react'
 function Settings() {
   return (
     <div>
-        <h2 className='text-center my-5'>This is the settings page</h2>
+        <h1 className='text-center my-5'>Settings</h1>
     </div>
   )
 }

@@ -3,9 +3,7 @@ import React from "react";
 
 function Dashboard() {
   return (
-    <div className="container-xl d-flex border rounded">
-      <h1>Dashboard</h1>
-    </div>
+    <h1 className="text-center mt-5">Dashboard</h1>
   )
 }
 

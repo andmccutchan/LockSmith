@@ -43,7 +43,7 @@ function LoginCard() {
                     Your password must be 8-20 characters long
                 </div>
             </div>
-            <button type="submit" className="btn btn-secondary mt-3">Login</button>
+            <button type="submit" className="btn btn-primary mt-3">Login</button>
         </form>
     </div>
     
