@@ -3,7 +3,10 @@ import React from "react";
 
 function Home() {
   return (
-    <h1 className="text-center mt-5">Home</h1>
+    <div>
+      <h1 className="text-center fw-medium mt-5">Securely store, manage, and create your passwords in one place</h1>
+    </div>
+    
   )
 }
 

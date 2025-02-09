@@ -1,6 +1,6 @@
 // Header.jsx
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router";
+import { Link, Navigate } from "react-router";
 
 function Header() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -11,6 +11,17 @@ function Header() {
       setIsLoggedIn(true);
     }
   }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setIsLoggedIn(false);
+    Navigate("/")
+  };
+
+  const handleLogin = () => {
+    setIsLoggedIn(true);  // Update the state on login
+  };
+
 
 
   return (
@@ -35,12 +46,22 @@ function Header() {
               <li className="nav-item">
                 <Link className="nav-link" to="/settings">Settings</Link>
               </li>
-              <li className="nav-item">
-               <Link className="nav-link" to="/login">Login</Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/register"><button type="button" class="btn btn-primary">Sign Up</button></Link>
-              </li>
+              {isLoggedIn ? (
+                <>
+                  <li className="nav-item">
+                    <Link onClick={handleLogout}>Log out</Link>
+                  </li>
+                </>
+                ) : (
+                  <>
+                    <li className="nav-item">
+                      <Link className="nav-link" to="/login">Login</Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link className="nav-link" to="/register"><button type="button" class="btn btn-primary">Sign Up</button></Link>
+                    </li>
+                  </>
+                )}
             </ul>
           </div>
         </div>

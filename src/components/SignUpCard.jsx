@@ -43,12 +43,12 @@ function SignUpCard() {
             <div>
                 <label htmlFor="inputPassword5" className="form-label">Password</label>
                 <input type="password" name='password' value={user.password} id="inputPassword5" className="form-control" aria-describedby="passwordHelpBlock" onChange={handleChange} placeholder='Password' required />
-                <div id="passwordHelpBlock" className="form-text text-dark">
+                <div id="passwordHelpBlock" className="form-text text-dark my-3">
                     Your password must be 8-20 characters long
                 </div>
             </div>
             {error && <span className='badge text-bg-danger text-center py-2 my-3'>{error}</span>}
-            <button type="submit" className="btn btn-primary mt-2">Sign Up</button>
+            <button type="submit" className="btn btn-primary mt-1">Sign Up</button>
         </form>
         <p className='form-text text-center'>Already have an account? <span><Link to="/login">Log in</Link></span></p>
     </div>
