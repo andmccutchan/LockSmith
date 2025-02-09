@@ -2,7 +2,7 @@ import React from 'react'
 
 function PasswordList() {
   return (
-    <div>PasswordList</div>
+    <div className='container border border-primary rounded m-2'>PasswordList</div>
   )
 }
 

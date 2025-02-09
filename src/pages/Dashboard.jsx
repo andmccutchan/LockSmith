@@ -5,10 +5,12 @@ import PasswordList from "../components/PasswordList";
 
 function Dashboard() {
   return (
-    <div>
-      <h1 className="text-center mt-5">Dashboard</h1>
-      <PasswordForm />
-      <PasswordList />
+    <div className="container">
+      <h1 className="mt-5 mx-4">Dashboard</h1>
+      <div className="container d-flex">
+        <PasswordList />
+        <PasswordForm />
+      </div>
     </div>
   )
 }
