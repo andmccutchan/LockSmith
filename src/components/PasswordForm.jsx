@@ -3,11 +3,11 @@ import React from 'react'
 function PasswordForm() {
 
   const handleSubmit = () => {
-    
+
   }
 
   return (
-    <div className='container border border-primary rounded m-2 p-3'>
+    <div className='container border border-3 border-dark rounded m-2 p-3'>
         <form>
           <div>
             <label className='form-label' htmlFor="websitePassword">Website/App Name</label>
