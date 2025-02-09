@@ -1,6 +1,11 @@
 import React from 'react'
 
 function PasswordForm() {
+
+  const handleSubmit = () => {
+    
+  }
+
   return (
     <div className='container border border-primary rounded m-2 p-3'>
         <form>
