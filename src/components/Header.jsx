@@ -18,12 +18,6 @@ function Header() {
     Navigate("/")
   };
 
-  const handleLogin = () => {
-    setIsLoggedIn(true);  // Update the state on login
-  };
-
-
-
   return (
     <header>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -43,12 +37,13 @@ function Header() {
               <li className="nav-item">
                 <Link className="nav-link" to="/dashboard">Dashboard</Link>
               </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/settings">Settings</Link>
-              </li>
+              
               {isLoggedIn ? (
                 <>
                   <li className="nav-item">
+                    <Link className="nav-link" to="/settings">Settings</Link>
+                  </li>
+                  <li className="nav-item mx-5">
                     <Link onClick={handleLogout}>Log out</Link>
                   </li>
                 </>

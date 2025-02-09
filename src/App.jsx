@@ -12,19 +12,19 @@ import ProtectedRoute from "./components/ProtectedRoute";
 function App() {
   return (
     <div className="d-flex flex-column min-vh-100">
-      <Header />
-      <div className="flex-grow-1">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route element={<ProtectedRoute />} >
-            <Route path="/dashboard" element={<Dashboard />} />
-          </Route>
-          <Route path="/settings" element={<Settings />} />
-        </Routes>
-      </div>
-      <Footer />
+        <Header />
+        <div className="flex-grow-1">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route element={<ProtectedRoute />} >
+              <Route path="/dashboard" element={<Dashboard />} />
+            </Route>
+            <Route path="/settings" element={<Settings />} />
+          </Routes>
+        </div>
+        <Footer />
     </div>
   );
 }

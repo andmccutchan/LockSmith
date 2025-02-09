@@ -1,9 +1,15 @@
 // Dashboard.jsx
 import React from "react";
+import PasswordForm from "../components/PasswordForm";
+import PasswordList from "../components/PasswordList";
 
 function Dashboard() {
   return (
-    <h1 className="text-center mt-5">Dashboard</h1>
+    <div>
+      <h1 className="text-center mt-5">Dashboard</h1>
+      <PasswordForm />
+      <PasswordList />
+    </div>
   )
 }
 
