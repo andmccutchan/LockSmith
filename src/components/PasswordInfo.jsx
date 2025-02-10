@@ -1,21 +1,21 @@
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 
 function PasswordInfo({website, username, password}) {
     const [isVisible, setIsVisible] = useState(false);
     const [userIsCopied, setUserIsCopied] = useState(false);
     const [passwordIsCopied, setPasswordIsCopied] = useState(false);
     const [viewCard, setViewCard] = useState(false);
-    const [validUrl, setValidUrl] = useState("")
     const faviconUrl = `${new URL(website).origin}/favicon.ico`;
-    const globeIcon = "https://img.icons8.com/?size=100&id=3685&format=png&color=000000"
+    const globeIcon = "https://img.icons8.com/?size=100&id=3685&format=png&color=000000";
 
-    const toggleVisibilityOn = () => {
-        setIsVisible(true);
+    const handleCloseCard = () => {
+        setViewCard(false);
+        setPasswordIsCopied(false);
+        setUserIsCopied(false)
     }
+    const handleOpenCard = () => setViewCard(true);
 
-    const toggleVisibilityOff = () => {
-        setIsVisible(false);
-    }
+    const toggleVisibility = () => setIsVisible(prev => !prev);
 
     const handleUserCopy = async () => {
         try {
@@ -36,28 +36,34 @@ function PasswordInfo({website, username, password}) {
             console.log("Failed to copy text: ", err);
         }
     }
+
+    const handleFaviconError = (e) => {
+        e.target.src = globeIcon;
+    };
     
 
   return (
     <>
         {viewCard ? (
             <div className='bg-secondary-subtle p-3 rounded my-2'>
-                <div className='d-flex align-item-center'>
-                    <div className='d-flex align-items-center border border-primary'>
-                        <img src={faviconUrl} width="32" height="32" alt="" className='me-2' />
+                <div className='d-flex align-item-center justify-content-between'>
+                    <div className='d-flex align-items-center'>
+                        <img src={faviconUrl} width="32" height="32" alt="" className='me-2' onError={handleFaviconError}  />
                         <h2>{website}</h2>
                     </div>
-                    <div className='d-flex justify-content-end align-items-center border border-danger'>
-                        <i className="fa-regular fa-pen-to-square"></i>
+                    <div className='d-flex justify-content-end align-items-center'>
+                        <button className='btn border-0'><i className="fa-solid fa-trash"></i></button>
+                        <button className='btn border-0'><i className="fa-regular fa-pen-to-square"></i></button>
+                        <button className='btn border-0'><i className="fa-solid fa-minus" onClick={handleCloseCard}></i></button>
                     </div>
                 </div>
                 <hr />
                 <div>
                     <label className='form-label p-0 m-0' htmlFor="username">Username</label>
                     <div className='d-flex'>
-                        <input className='form-control border-0 shadow-none p-0 bg-transparent mb-3' name='username' type="text" value={username} readonly/>
+                        <input className='form-control border-0 shadow-none p-0 bg-transparent mb-3' name='username' type="text" value={username} readOnly/>
                         {userIsCopied ? (
-                            <p className='text-success'>Copied</p>
+                            <button className='btn btn-success'>Copied</button>
                         ) : (
                             <button className='btn btn-primary' onClick={handleUserCopy}>Copy</button>
                         )}
@@ -68,12 +74,12 @@ function PasswordInfo({website, username, password}) {
                     <div className='d-flex'>
                         <input className='form-control border-0 shadow-none p-0 bg-transparent' name='password' type={isVisible ? "text" : "password"} value={password} readOnly />
                         {isVisible ? (
-                            <button className='btn border-0' onClick={toggleVisibilityOff}><i className="fa-regular fa-eye-slash"></i></button>
+                            <button className='btn border-0' onClick={toggleVisibility}><i className="fa-regular fa-eye-slash"></i></button>
                         ) : (
-                            <button className='btn border-0' onClick={toggleVisibilityOn}><i className="fa-regular fa-eye"></i></button>
+                            <button className='btn border-0' onClick={toggleVisibility}><i className="fa-regular fa-eye"></i></button>
                         )}
                         {passwordIsCopied ? (
-                            <p className='text-success'>Copied</p>
+                            <button className='btn btn-success'>Copied</button>
                         ) : (
                             <button className='btn btn-primary' onClick={handlePasswordCopy}>Copy</button>
                         )}
@@ -82,11 +88,16 @@ function PasswordInfo({website, username, password}) {
                 </div>
             </div>
         ) : (
-            <div className='d-flex p-2 my-1' onClick={() => setViewCard(true)}> 
-                <img className='mx-2 border-0' src={faviconUrl} width="24" height="24" onError={(e) => e.target.src = globeIcon} />
-                <div className='d-flex flex-column'>
-                    <p className='m-0 p-0'>{website}</p>
-                    <p className='m-0 fw-lighter user-pass-info'>{username}</p>
+            <div className='d-flex justify-content-between p-2 my-1'> 
+                <div className='d-flex'>
+                    <img className='mx-2 border-0' src={faviconUrl} width="24" height="24" onError={handleFaviconError} />
+                    <div className='d-flex flex-column'>
+                        <p className='m-0 p-0'>{website}</p>
+                        <p className='m-0 fw-lighter user-pass-info'>{username}</p>
+                    </div>
+                </div>
+                <div>
+                    <button className='btn border-0'><i className="fa-solid fa-plus" onClick={handleOpenCard}></i></button>
                 </div>
             </div>
         )}
