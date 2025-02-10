@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { use, useState } from 'react'
 import { motion } from 'framer-motion';
 
 function PasswordInfo({website, username, password}) {
@@ -7,6 +7,8 @@ function PasswordInfo({website, username, password}) {
     const [passwordIsCopied, setPasswordIsCopied] = useState(false);
     const [viewCard, setViewCard] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
+    const [originalUsername, setOriginalUsername] = useState(username);
+    const [originalPassword, setOriginalPassword] = useState(password);
     const [editedUsername, setEditedUsername] = useState(username);
     const [editedPassword, setEditedPassword] = useState(password);
     
@@ -18,12 +20,36 @@ function PasswordInfo({website, username, password}) {
         setPasswordIsCopied(false);
         setUserIsCopied(false);
         setIsEditing(false);
+        setEditedUsername(originalUsername);
+        setEditedPassword(originalPassword);
     }
 
     const handleOpenCard = () => setViewCard(true);
     const toggleVisibility = () => setIsVisible(prev => !prev);
-    const handleEditClick = () => setIsEditing(prev => !prev);
-    const handleSave = () => setIsEditing(false);
+
+    const handleEditClick = () => {
+        setIsEditing(true);
+        setEditedUsername(originalUsername);
+        setEditedPassword(originalPassword);
+        setUserIsCopied(false);
+        setPasswordIsCopied(false);
+    };
+
+    const handleSave = () => {
+        setOriginalUsername(editedUsername);
+        setOriginalPassword(editedPassword);
+        setIsEditing(false);
+        setUserIsCopied(false);
+        setPasswordIsCopied(false);
+    };
+
+    const handleCancel = () => {
+        setEditedUsername(originalUsername);
+        setEditedPassword(originalPassword);
+        setIsEditing(false);
+        setUserIsCopied(false);
+        setPasswordIsCopied(false);
+    }
 
     const handleUserCopy = async () => {
         try {
@@ -62,7 +88,7 @@ function PasswordInfo({website, username, password}) {
                     <div className='d-flex justify-content-end align-items-center'>
                         {isEditing ? (
                             <>
-                                <button className='btn mx-2 border-0' onClick={handleEditClick}>Cancel</button>
+                                <button className='btn mx-2 border-0' onClick={handleCancel}>Cancel</button>
                                 <button className='btn btn-primary border-0' onClick={handleSave}>Save</button>
                             </>
                         ) : (

@@ -16,6 +16,7 @@ function PasswordForm({ addPassword }) {
     if (!formData.website || !formData.username || !formData.password) return;
     addPassword(formData);
     setFormData({website: '', username: '', password: ''});
+    console.log(formData);
   }
 
   return (
