@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { motion } from 'framer-motion';
 
 function PasswordInfo({website, username, password}) {
     const [isVisible, setIsVisible] = useState(false);
@@ -45,11 +46,11 @@ function PasswordInfo({website, username, password}) {
   return (
     <>
         {viewCard ? (
-            <div className='bg-secondary-subtle p-3 rounded my-2'>
+            <motion.div className="p-3 rounded my-2">
                 <div className='d-flex align-item-center justify-content-between'>
                     <div className='d-flex align-items-center'>
-                        <img src={faviconUrl} width="32" height="32" alt="" className='me-2' onError={handleFaviconError}  />
-                        <h2>{website}</h2>
+                        <img src={faviconUrl} width="24" height="24" alt="" className='me-2' onError={handleFaviconError}  />
+                        <p>{website}</p>
                     </div>
                     <div className='d-flex justify-content-end align-items-center'>
                         <button className='btn border-0'><i className="fa-solid fa-trash"></i></button>
@@ -86,10 +87,10 @@ function PasswordInfo({website, username, password}) {
                         
                     </div>
                 </div>
-            </div>
+            </motion.div>
         ) : (
-            <div className='d-flex justify-content-between p-2 my-1'> 
-                <div className='d-flex'>
+            <div className="d-flex justify-content-between my-1"> 
+                <div className='d-flex p-0'>
                     <img className='mx-2 border-0' src={faviconUrl} width="24" height="24" onError={handleFaviconError} />
                     <div className='d-flex flex-column'>
                         <p className='m-0 p-0'>{website}</p>
