@@ -10,7 +10,7 @@ function PasswordForm() {
     <div className='container border border-3 border-dark rounded m-2 p-3'>
         <form>
           <div>
-            <label className='form-label' htmlFor="websitePassword">Website/App Name</label>
+            <label className='form-label' htmlFor="websitePassword">Website Url</label>
             <input className='form-control' type="text" name="website" id="websitePassword" />
           </div>
           <div>
