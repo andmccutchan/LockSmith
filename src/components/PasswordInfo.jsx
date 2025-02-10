@@ -105,7 +105,7 @@ function PasswordInfo({website, username, password, onDelete}) {
                             {isEditing ? (
                                 <>
                                     <button className='btn mx-2 border-0' onClick={handleCancel}>Cancel</button>
-                                    <button className='btn btn-primary border-0'>Save</button>
+                                    <button className='btn btn-primary border-0' onClick={handleSave}>Save</button>
                                 </>
                             ) : (
                                     <>

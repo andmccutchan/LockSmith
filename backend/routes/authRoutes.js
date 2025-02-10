@@ -2,6 +2,7 @@ import express from "express";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken"
 import User from "../models/User.js";
+import SiteProfile from "../models/SiteProfile.js";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -53,5 +54,11 @@ router.post("/login", async (req, res) => {
         res.status(500).json({error: err.message});
     }
 });
+
+router.post("/dashboard", async (req, res) => {
+    const {website, username, password} = req.body;
+
+
+})
 
 export default router;
