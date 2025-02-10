@@ -1,3 +1,4 @@
+//PasswordForm.jsx
 import React, { useState } from 'react'
 
 function PasswordForm({ addPassword }) {
@@ -6,6 +7,15 @@ function PasswordForm({ addPassword }) {
     username: '',
     password: ''
   });
+  const [securePassword, setSecurePassword] = useState("");
+
+  const generatePassword = (length = 12) => {
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+[]{}|;:,.<>?";
+    let password = "";
+    for (let i = 0; i < length; i++) {
+      password += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+  }
 
   const handleChange = (e) => {
     setFormData({...formData, [e.target.name]: e.target.value})
@@ -20,7 +30,7 @@ function PasswordForm({ addPassword }) {
   }
 
   return (
-    <div className='container border border-3 border-dark rounded m-2 p-3'>
+    <div className='container rounded m-2 p-3'>
       <form onSubmit={handleSubmit}>
         <div>
           <label className='form-label' htmlFor="websitePassword">Website URL</label>
@@ -35,6 +45,7 @@ function PasswordForm({ addPassword }) {
           <input className='form-control' type="password" name="password" id="password" value={formData.password} onChange={handleChange} />
         </div>
         <button className='btn bg-primary text-light my-3' type='submit'>Add Password</button>
+        <button className='btn ms-2 text-decoration-underline' onClick={generatePassword}>Generate Secure Password</button>
       </form>
     </div>
   

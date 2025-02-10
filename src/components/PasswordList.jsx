@@ -10,8 +10,9 @@ function PasswordList() {
   return (
     <div className='container rounded m-2 p-3'>
         <PasswordInfo website="https://www.youtube.com/" username="mccutc_a1" password="securePassword" />
-        <PasswordInfo website="https://chatgpt.com/" username="andmccutchan" password="password" />
-        <PasswordInfo website="https://expressjs.com/" username="andmccutchan" password="password" />
+        <PasswordInfo website="https://www.google.com/" username="mccutc_a1" password="securePassword" />
+        <PasswordInfo website="https://fontawesome.com/" username="mccutc_a1" password="securePassword" />
+        <PasswordInfo website="https://x.com/" username="mccutc_a1" password="securePassword" />
     </div>
   )
 }
