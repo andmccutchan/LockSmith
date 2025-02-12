@@ -7,34 +7,22 @@ function PasswordForm({ addPassword }) {
     username: '',
     password: ''
   });
-  const [securePassword, setSecurePassword] = useState("");
-  const [usingSecurePassword, setUsingSecurePassword] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
   const toggleVisibility = () => setIsVisible(prev => !prev);
 
-  const generatePassword = (length = 12) => {
-    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+[]{}|;:,.<>?";
-    let newPassword = "";
-    for (let i = 0; i < length; i++) {
-      newPassword += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
-    setSecurePassword(newPassword);
-    setUsingSecurePassword(true);
-    setFormData(prev => ({ ...prev, password: newPassword }));
-  }
-
   const handleChange = (e) => {
-    setUsingSecurePassword(false);
     setFormData({...formData, [e.target.name]: e.target.value})
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!formData.website || !formData.username || !formData.password) return;
+    if (!formData.website || !formData.username || !formData.password) {
+      alert("Please fill out all fields");
+      return
+    };
     addPassword(formData);
     setFormData({website: '', username: '', password: ''});
-    setSecurePassword("")
   }
 
   return (
@@ -60,7 +48,7 @@ function PasswordForm({ addPassword }) {
           </div>
         </div>
         <button className='btn bg-primary text-light my-3' type='submit'>Add Password</button>   
-        <button className='btn ms-2 text-decoration-underline' type='button' onClick={generatePassword}>Generate Secure Password</button>
+        <button className='btn ms-2 text-decoration-underline' type='button'>Generate Secure Password</button>
       </form>
     </div>
   

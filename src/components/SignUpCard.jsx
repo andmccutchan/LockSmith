@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { useNavigate, Link } from 'react-router'
-import { set } from 'mongoose';
 
 function SignUpCard() {
     const [user, setUser] = useState({email: "", password: ""});

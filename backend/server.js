@@ -3,7 +3,7 @@ import mongoose, { connect } from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
 import authRoutes from "./routes/authRoutes.js";
-
+import passwordRoutes from "./routes/passwordRoutes.js";
 
 dotenv.config();
 
@@ -20,6 +20,7 @@ mongoose.connect(process.env.MONGODB_URI)
 
 // Routes
 app.use("/api/auth", authRoutes);
+app.use("/api", passwordRoutes);
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
   

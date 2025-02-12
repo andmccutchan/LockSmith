@@ -94,28 +94,30 @@ function PasswordInfo({website, username, password, onDelete}) {
                 {!viewCard ? (
                     <button className='btn border-0'><i className="fa-solid fa-plus" onClick={handleOpenCard}></i></button>
                 ) : (
-                    <motion.div 
-                        className='d-flex justify-content-end align-items-center'
-                        key="buttons"
-                        initial={{ x: 20, opacity: 0 }}
-                        animate={{ x: 0, opacity: 1 }}
-                        exit={{ x: 20, opacity: 0 }}  
-                        transition={{ duration: 0.3, ease: "easeInOut" }}  
-                    >
-                            {isEditing ? (
-                                <>
-                                    <button className='btn mx-2 border-0' onClick={handleCancel}>Cancel</button>
-                                    <button className='btn btn-primary border-0' onClick={handleSave}>Save</button>
-                                </>
-                            ) : (
+                    <>
+                        <motion.div 
+                            className='d-flex justify-content-end align-items-center'
+                            key="buttons"
+                            initial={{ x: 20, opacity: 0 }}
+                            animate={{ x: 0, opacity: 1 }}
+                            exit={{ x: 20, opacity: 0 }}  
+                            transition={{ duration: 0.3, ease: "easeInOut" }}  
+                        >
+                                {isEditing ? (
                                     <>
-                                        <button className='btn border-0' onClick={onDelete}><i className="fa-solid fa-trash"></i></button>
-                                        <button className='btn border-0' onClick={handleEditClick}><i className="fa-regular fa-pen-to-square"></i></button>
+                                        <button className='btn mx-2 border-0' onClick={handleCancel}>Cancel</button>
+                                        <button className='btn btn-primary border-0' onClick={handleSave}>Save</button>
                                     </>
-                                
-                            )}
+                                ) : (
+                                        <>
+                                            <button className='btn border-0' onClick={() => onDelete()}><i className="fa-solid fa-trash"></i></button>
+                                            <button className='btn border-0' onClick={handleEditClick}><i className="fa-regular fa-pen-to-square"></i></button>
+                                        </>
+                                    
+                                )}
+                        </motion.div>
                         <button className='btn border-0'><i className="fa-solid fa-minus" onClick={handleCloseCard}></i></button>
-                    </motion.div>
+                    </>
                 )}
             </div>
         </div>
