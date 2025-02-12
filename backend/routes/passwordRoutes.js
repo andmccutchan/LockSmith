@@ -23,7 +23,8 @@ const verifyToken = (req, res, next) => {
     if (err) {
       return res.status(403).json({ message: "Invalid token" });
     }
-    req.userId = decoded.userId; // Attach userId from token
+    // console.log("Decoded token:", decoded);
+    req.userId = decoded.id; // Attach userId from token
     next();
   });
 };
@@ -47,7 +48,7 @@ router.post("/dashboard", verifyToken, async (req, res) => {
     const salt = await bcrypt.genSalt(SALT_ROUNDS);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    console.log("Hashed Password:", hashedPassword);
+    // console.log("Hashed Password:", hashedPassword);
     console.log("UserId:", req.userId);
 
     const newPassword = new UserPasswords({

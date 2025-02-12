@@ -52,8 +52,7 @@ function Dashboard() {
       const token = localStorage.getItem("token");
       // Send DELETE request to backend with the website as the parameter
       await axios.delete(`http://localhost:5001/api/dashboard/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-        data: { id }, // Sending website in the request body
+        headers: { Authorization: `Bearer ${token}` }
       });
   
       // Remove the password from the frontend state (UI)
