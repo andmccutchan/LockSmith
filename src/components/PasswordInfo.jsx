@@ -110,7 +110,7 @@ function PasswordInfo({website, username, password, onDelete}) {
                                     </>
                                 ) : (
                                         <>
-                                            <button className='btn border-0' onClick={() => onDelete()}><i className="fa-solid fa-trash"></i></button>
+                                            <button className='btn border-0' onClick={onDelete}><i className="fa-solid fa-trash"></i></button>
                                             <button className='btn border-0' onClick={handleEditClick}><i className="fa-regular fa-pen-to-square"></i></button>
                                         </>
                                     

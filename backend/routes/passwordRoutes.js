@@ -12,7 +12,9 @@ const router = express.Router();
 
 // Middleware to verify JWT and attach user ID to request object
 const verifyToken = (req, res, next) => {
-  const token = req.headers["Authorization"]?.split(" ")[1];
+  // console.log("Authorization Header:", req.headers["authorization"]);
+
+  const token = req.headers["authorization"]?.split(" ")[1];
   if (!token) {
     return res.status(403).json({ message: "No token provided" });
   }
@@ -46,6 +48,7 @@ router.post("/dashboard", verifyToken, async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, salt);
 
     console.log("Hashed Password:", hashedPassword);
+    console.log("UserId:", req.userId);
 
     const newPassword = new UserPasswords({
       userId: req.userId,
@@ -62,20 +65,9 @@ router.post("/dashboard", verifyToken, async (req, res) => {
   }
 });
 
-// Route to delete a password for the authenticated user
-router.delete("/dashboard/:website", verifyToken, async (req, res) => {
-  try {
-    const { website } = req.params;
-    await UserPasswords.deleteOne({ userId: req.userId, website });
-    res.json({ message: "Password deleted successfully" });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Error deleting password" });
-  }
-});
-
 // Route to delete a password
 router.delete("/dashboard/:id", verifyToken, async (req, res) => {
+  console.log("Delete is tried");
     try {
       const { id } = req.params; // Get the password ID from the URL
   
@@ -91,7 +83,6 @@ router.delete("/dashboard/:id", verifyToken, async (req, res) => {
   
       res.status(200).json({ message: "Password deleted successfully" });
     } catch (err) {
-      console.error("Error deleting password:", err);
       res.status(500).json({ message: "Error deleting password", error: err.message });
     }
   });
