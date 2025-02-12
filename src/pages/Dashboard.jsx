@@ -34,12 +34,12 @@ function Dashboard() {
   
 
   const addPassword = async (newPassword) => {
-    console.log("Password being added:", newPassword)
     try {
       const token = localStorage.getItem("token");
       await axios.post("http://localhost:5001/api/dashboard", newPassword, { 
         headers: { Authorization: `Bearer ${token}` }
       });
+      console.log("Password being added:", newPassword);
       
       setPasswordInfo((prevPasswords) => [...prevPasswords, newPassword]);
     } catch (err) {
