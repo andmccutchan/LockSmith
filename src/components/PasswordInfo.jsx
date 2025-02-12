@@ -1,6 +1,7 @@
 //PasswordInfo.jsx
 import React, { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion';
+import axios from 'axios';
 
 function PasswordInfo({website, username, password, onDelete}) {
     const [isVisible, setIsVisible] = useState(false);
@@ -36,12 +37,16 @@ function PasswordInfo({website, username, password, onDelete}) {
         setPasswordIsCopied(false);
     };
 
-    const handleSave = () => {
-        setOriginalUsername(editedUsername);
-        setOriginalPassword(editedPassword);
-        setIsEditing(false);
-        setUserIsCopied(false);
-        setPasswordIsCopied(false);
+    const handleSave = async () => {
+        try {
+            await axios.post("localhost:5001/api/dashboard")
+            setOriginalUsername(editedUsername);
+            setOriginalPassword(editedPassword);
+            setIsEditing(false);
+            setUserIsCopied(false);
+            setPasswordIsCopied(false);
+        }
+        
     };
 
     const handleCancel = () => {
