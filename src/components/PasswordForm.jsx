@@ -46,7 +46,12 @@ function PasswordForm({ addPassword }) {
   return (
     <div className='container-fluid rounded m-2 p-3'>
       {inAddView ? (
-        <form onSubmit={handleSubmit}>
+        <form 
+          onSubmit={handleSubmit} 
+          autoComplete="new-password"
+          autoCorrect="off"
+          spellCheck="false"
+        >
           <div>
             <label className='form-label' htmlFor="websitePassword">Website URL</label>
             <input className='form-control' type="text" name="website" id="websitePassword" value={formData.website} onChange={handleChange} />
@@ -70,7 +75,7 @@ function PasswordForm({ addPassword }) {
             <div className='d-flex align-items-center'>
               <button className='btn btn-danger' onClick={handleInAddView}>Cancel</button>
             </div>
-            <div className=''>
+            <div>
               <button
                 className='btn ms-2 text-decoration-underline'
                 type='button'
@@ -83,7 +88,9 @@ function PasswordForm({ addPassword }) {
           </div>
         </form>
       ) : (
-        <button className='btn btn-success' onClick={handleInAddView}><i className="fa-solid fa-plus me-2"></i>New Item</button>
+        <div>
+          <button className='btn btn-success' onClick={handleInAddView}><i className="fa-solid fa-plus me-2"></i>New Item</button>
+        </div>
       )}
     </div>
   

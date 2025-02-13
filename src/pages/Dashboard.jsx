@@ -66,7 +66,7 @@ function Dashboard() {
   return (
       <>
         <div className="d-flex">
-          <div className='container rounded m-2 p-3 info-container overflow-auto w-25 border'>
+          <div className='container rounded m-2 p-3 info-container overflow-auto border passwords-list'>
             {passwordInfo.map((entry, index) => (
               <PasswordInfo
                 key={index}
@@ -77,7 +77,7 @@ function Dashboard() {
               />
             ))}
           </div>
-          <div className="container-fluid d-flex w-50 border rounded">
+          <div className="container-fluid d-flex m-2 border rounded">
               <PasswordForm addPassword={addPassword} />
           </div>
         </div>

@@ -2,7 +2,6 @@
     font-size: 0.8rem;
 }
 
-/* .info-container {
-    max-height: 300px;
-    overflow: scroll;
-} */
+.passwords-list {
+    width: 40%;
+}
