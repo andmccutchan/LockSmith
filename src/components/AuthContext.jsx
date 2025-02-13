@@ -24,7 +24,7 @@ export const AuthProvider = ({ children }) => {
       }, []);
 
     const login = (token, expiresIn) => {
-        const expirationTime = Date.now() + expiresIn * 1000
+        const expirationTime = Date.now() + expiresIn * 1000;
         localStorage.setItem("token", token);
         localStorage.setItem("tokenExpiration", expirationTime);
         setIsLoggedIn(true);
