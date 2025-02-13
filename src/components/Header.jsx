@@ -14,9 +14,9 @@ function Header() {
 
   return (
     <header>
-      <nav className="navbar navbar-expand-lg bg-body-tertiary">
+      <nav className="navbar navbar-expand-lg bg-dark page-header px-3 rounded-pill my-2">
         <div className="container-fluid">
-          <Link className="navbar-brand d-flex" to="/" >
+          <Link className="navbar-brand d-flex text-light" to="/" >
             <img className="px-1" src="src/assets/lock-closed-svgrepo-com.svg" alt="Lock logo" />
             Lock<span className="text-primary">Smith</span>
           </Link>
@@ -26,28 +26,28 @@ function Header() {
           <div className="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
             <ul className="navbar-nav d-flex align-items-center">
               <li className="nav-item">
-                <Link className="nav-link" to="/">Home</Link>
+                <Link className="nav-link text-light" to="/">Home</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/dashboard">Dashboard</Link>
+                <Link className="nav-link text-light" to="/dashboard">Dashboard</Link>
               </li>
               
               {isLoggedIn ? (
                 <>
                   <li className="nav-item">
-                    <Link className="nav-link" to="/settings">Settings</Link>
+                    <Link className="nav-link text-light" to="/settings">Settings</Link>
                   </li>
-                  <li className="nav-item mx-5">
-                    <button className="btn btn-link nav-link" onClick={handleLogout}>Log out</button>
+                  <li className="nav-item mx-2">
+                    <button className="btn btn-link nav-link text-decoration-underline text-light" onClick={handleLogout}>Log out</button>
                   </li>
                 </>
                 ) : (
                   <>
                     <li className="nav-item">
-                      <Link className="nav-link" to="/login">Login</Link>
+                      <Link className="nav-link text-light" to="/login">Login</Link>
                     </li>
                     <li className="nav-item">
-                      <Link className="nav-link " to="/register"><button type="button" className="btn btn-primary">Sign Up</button></Link>
+                      <Link className="nav-link" to="/register"><button type="button" className="btn btn-primary border-0 rounded-pill px-4">Sign Up</button></Link>
                     </li>
                   </>
                 )}

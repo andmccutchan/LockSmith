@@ -13,7 +13,7 @@ import { AuthProvider } from "./components/AuthContext";
 function App() {
   return (
     <AuthProvider>
-      <div className="d-flex flex-column min-vh-100">
+      <div className="d-flex flex-column min-vh-100 bg-body-tertiary">
           <Header />
           <div className="d-flex flex-column flex-grow-1 justify-content-start">
             <Routes>

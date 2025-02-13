@@ -5,3 +5,8 @@
 .passwords-list {
     width: 40%;
 }
+
+.page-header {
+    width: 80%;
+    margin: 0 auto;
+}
