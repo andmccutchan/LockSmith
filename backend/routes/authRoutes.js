@@ -49,7 +49,7 @@ router.post("/login", async (req, res) => {
 
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1h"});
 
-        res.json({token, user});
+        res.json({token, expiresIn: 3600, user});
     } catch (err) {
         res.status(500).json({error: err.message});
     }

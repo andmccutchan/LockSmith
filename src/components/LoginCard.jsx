@@ -19,7 +19,10 @@ function LoginCard() {
             const res = await axios.post("http://localhost:5001/api/auth/login", credentials);
             // console.log("Login successful:", res.data);
 
-            login(res.data.token); // Save to local storage
+            const { token } = res.data;
+            const expiresIn = 3600;
+
+            login(token, expiresIn); // Save to local storage
             navigate("/dashboard"); // Redirect to dashboard
         } catch (err) {
             setError(err.response?.data?.error || "Login failed");
