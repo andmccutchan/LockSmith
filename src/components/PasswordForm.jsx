@@ -7,6 +7,7 @@ function PasswordForm({ addPassword }) {
     username: '',
     password: ''
   });
+  const [formFull, setFormFull] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
   const toggleVisibility = () => setIsVisible(prev => !prev);
@@ -18,8 +19,7 @@ function PasswordForm({ addPassword }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!formData.website || !formData.username || !formData.password) {
-      alert("Please fill out all fields");
-      return
+      return;
     };
     addPassword(formData);
     setFormData({website: '', username: '', password: ''});

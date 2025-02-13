@@ -45,8 +45,9 @@ function PasswordInfo({website, username, password, onDelete}) {
             setIsEditing(false);
             setUserIsCopied(false);
             setPasswordIsCopied(false);
+        } catch (err) {
+
         }
-        
     };
 
     const handleCancel = () => {
@@ -139,7 +140,7 @@ function PasswordInfo({website, username, password, onDelete}) {
                     <div>
                         <label className='form-label p-0 m-0' htmlFor="username">Username</label>
                         <div className='d-flex'>
-                            <input className='form-control border-0 shadow-none p-0 bg-transparent mb-3' name='username' type="text" value={editedUsername} readOnly={!isEditing} onChange={(e) => setEditedUsername(e.target.value)} />
+                            <input className={`form-control border-0 ${!isEditing ? "shadow-none" : null } p-0 bg-transparent`} name='username' type="text" value={editedUsername} readOnly={!isEditing} onChange={(e) => setEditedUsername(e.target.value)} />
                             {userIsCopied ? (
                                 <button className='btn btn-success d-flex align-items-center'>Copied<i className="fa-solid fa-check ms-2"></i></button>
                             ) : (
@@ -150,7 +151,7 @@ function PasswordInfo({website, username, password, onDelete}) {
                     <div>
                         <label className='form-label p-0 m-0' htmlFor="username">Password</label>
                         <div className='d-flex'>
-                            <input className='form-control border-0 shadow-none p-0 bg-transparent' name='password' type={isVisible ? "text" : "password"} value={editedPassword} readOnly={!isEditing} onChange={(e) => setEditedPassword(e.target.value)} />
+                            <input className={`form-control border-0 ${!isEditing ? "shadow-none" : null } p-0 bg-transparent`} name='password' type={isVisible ? "text" : "password"} value={editedPassword} readOnly={!isEditing} onChange={(e) => setEditedPassword(e.target.value)} />
                             {isVisible ? (
                                 <button className='btn border-0' onClick={toggleVisibility}><i className="fa-regular fa-eye-slash"></i></button>
                             ) : (

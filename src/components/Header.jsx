@@ -1,21 +1,15 @@
 // Header.jsx
-import React, { useEffect, useState } from "react";
-import { Link, Navigate } from "react-router";
+import React, { useContext, useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router";
+import { AuthContext } from "./AuthContext";
 
 function Header() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {
-    const isAuthenticated = !!localStorage.getItem("token");
-    if (isAuthenticated) {
-      setIsLoggedIn(true);
-    }
-  }, []);
+  const { isLoggedIn, logout } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    setIsLoggedIn(false);
-    Navigate("/")
+    logout();
+    navigate("/"); // Redirect to home
   };
 
   return (

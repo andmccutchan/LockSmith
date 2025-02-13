@@ -16,7 +16,7 @@ function Dashboard() {
           console.error("No token found in local storage");
         }
 
-        console.log("Token found:", token)
+        // console.log("Token found:", token)
         
         const response = await axios.get("http://localhost:5001/api/dashboard", {
           headers: {
@@ -39,7 +39,7 @@ function Dashboard() {
       await axios.post("http://localhost:5001/api/dashboard", newPassword, { 
         headers: { Authorization: `Bearer ${token}` }
       });
-      console.log("Password being added:", newPassword);
+      // console.log("Password being added:", newPassword);
       
       setPasswordInfo((prevPasswords) => [...prevPasswords, newPassword]);
     } catch (err) {
@@ -64,23 +64,23 @@ function Dashboard() {
   
   
   return (
-    <div className="container border border-3 border-dark mt-5">
-      <h1 className="mt-5 mx-4">Dashboard</h1>
-      <div className="container d-flex">
-        <PasswordForm addPassword={addPassword} />
-        <div className='container rounded m-2 p-3'>
-          {passwordInfo.map((entry, index) => (
-            <PasswordInfo
-              key={index}
-              website={entry.website}
-              username={entry.username}
-              password={entry.password}
-              onDelete={() => deletePassword(entry._id)}
-            />
-          ))}
+      <div className="container-fluid border">
+        <h1 className="mt-5 mx-4 text-center">Dashboard</h1>
+        <div className="container d-flex">
+          <PasswordForm addPassword={addPassword} />
+          <div className='container rounded m-2 p-3 info-container overflow-auto border border-primary'>
+            {passwordInfo.map((entry, index) => (
+              <PasswordInfo
+                key={index}
+                website={entry.website}
+                username={entry.username}
+                password={entry.password}
+                onDelete={() => deletePassword(entry._id)}
+              />
+            ))}
+          </div>
+        </div>
       </div>
-      </div>
-    </div>
   )
 }
 

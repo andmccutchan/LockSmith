@@ -15,7 +15,7 @@ function LoginCard() {
         e.preventDefault();
         try {
             const res = await axios.post("http://localhost:5001/api/auth/login", credentials);
-            console.log("Login successful:", res.data);
+            // console.log("Login successful:", res.data);
 
             localStorage.setItem("token", res.data.token) // Save to local storage
             navigate("/dashboard"); // Redirect to dashboard

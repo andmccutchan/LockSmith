@@ -3,10 +3,10 @@ import UserPasswords from "../models/SavedPasswords.js";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import bcrypt from "bcryptjs";
-
-const SALT_ROUNDS = 10;
-
+import CryptoJS from "crypto-js";
 dotenv.config();
+
+const SECRET_KEY = process.env.ENCRYPTION_SECRET;
 
 const router = express.Router();
 
@@ -32,8 +32,17 @@ const verifyToken = (req, res, next) => {
 // Route to get all saved passwords for the authenticated user
 router.get("/dashboard", verifyToken, async (req, res) => {
   try {
+    console.log("Encryption Key:", SECRET_KEY);
+
     const passwords = await UserPasswords.find({ userId: req.userId });
-    res.json(passwords);
+    const decryptedPassword = passwords.map((passwordEntry) => ({
+      _id: passwordEntry._id,
+      website: passwordEntry.website,
+      username: passwordEntry.username,
+      password: CryptoJS.AES.decrypt(passwordEntry.password, SECRET_KEY).toString(CryptoJS.enc.Utf8),
+    }));
+
+    res.json(decryptedPassword);
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Error retrieving passwords" });
@@ -45,17 +54,15 @@ router.post("/dashboard", verifyToken, async (req, res) => {
   try {
     const { website, username, password } = req.body;
     
-    const salt = await bcrypt.genSalt(SALT_ROUNDS);
-    const hashedPassword = await bcrypt.hash(password, salt);
-
-    // console.log("Hashed Password:", hashedPassword);
-    console.log("UserId:", req.userId);
+    //Encrypt password
+    const encryptedPassword = CryptoJS.AES.encrypt(password, SECRET_KEY).toString();
+    // console.log("UserId:", req.userId);
 
     const newPassword = new UserPasswords({
       userId: req.userId,
       website,
       username,
-      password: hashedPassword
+      password: encryptedPassword
     });
 
     await newPassword.save();
