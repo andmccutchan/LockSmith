@@ -38,7 +38,7 @@ function Header() {
                     <Link className="nav-link" to="/settings">Settings</Link>
                   </li>
                   <li className="nav-item mx-5">
-                    <Link onClick={handleLogout}>Log out</Link>
+                    <button className="btn btn-link nav-link" onClick={handleLogout}>Log out</button>
                   </li>
                 </>
                 ) : (

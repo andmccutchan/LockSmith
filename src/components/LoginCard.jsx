@@ -1,11 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import axios from 'axios'
-import { useNavigate } from 'react-router'
+import { Link, useNavigate } from 'react-router'
+import { AuthContext } from './AuthContext'
 
 function LoginCard() {
     const [credentials, setCredentials] = useState({email: "", password: ""})
     const [error, setError] = useState("");
     const navigate = useNavigate();
+    const { login } = useContext(AuthContext);
 
     const handleChange = (e) => {
         setCredentials({...credentials, [e.target.name]: e.target.value});
@@ -17,7 +19,7 @@ function LoginCard() {
             const res = await axios.post("http://localhost:5001/api/auth/login", credentials);
             // console.log("Login successful:", res.data);
 
-            localStorage.setItem("token", res.data.token) // Save to local storage
+            login(res.data.token); // Save to local storage
             navigate("/dashboard"); // Redirect to dashboard
         } catch (err) {
             setError(err.response?.data?.error || "Login failed");
@@ -29,7 +31,10 @@ function LoginCard() {
     <div>
         <form onSubmit={handleSubmit} className='card p-3 mx-auto w-25 bg-body-tertiary text-dark my-5 py-4'>
             <div>
-                <h2 className='text-center my-2'>PassWorks Login</h2>
+                <div className="d-flex justify-content-center align-items-center">
+                    <img className="px-1" src="src/assets/lock-closed-svgrepo-com.svg" alt="Lock logo" />
+                    <h2 className='text-center my-2'>Lock<span className='text-primary'>Smith</span> Login</h2>
+                </div>
             </div>
             <div className="mb-3">
                 <label htmlFor="userEmail" className="form-label">Username</label>
@@ -41,6 +46,7 @@ function LoginCard() {
             </div>
             {error && <span className="badge text-bg-danger text-center py-2 my-3">{error}</span>}
             <button type="submit" className="btn btn-primary mt-3">Login</button>
+            <p className='form-text text-center mt-3'>New to LockSmith? <span><Link to="/register">Sign Up</Link></span></p>
         </form>
     </div>
     

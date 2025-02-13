@@ -64,11 +64,11 @@ function Dashboard() {
   
   
   return (
-      <div className="container-fluid border">
+      <div className="container-fluid">
         <h1 className="mt-5 mx-4 text-center">Dashboard</h1>
         <div className="container d-flex">
           <PasswordForm addPassword={addPassword} />
-          <div className='container rounded m-2 p-3 info-container overflow-auto border border-primary'>
+          <div className='container rounded m-2 p-3 info-container overflow-auto'>
             {passwordInfo.map((entry, index) => (
               <PasswordInfo
                 key={index}

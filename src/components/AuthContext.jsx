@@ -5,6 +5,11 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
     const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
 
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        setIsLoggedIn(!!token);
+      }, []);
+
     const login = (token) => {
         localStorage.setItem("token", token);
         setIsLoggedIn(true);

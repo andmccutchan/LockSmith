@@ -1,5 +1,6 @@
 //PasswordForm.jsx
 import React, { useState } from 'react'
+import CryptoJS from 'crypto-js';
 
 function PasswordForm({ addPassword }) {
   const [formData, setFormData] = useState({
@@ -7,13 +8,24 @@ function PasswordForm({ addPassword }) {
     username: '',
     password: ''
   });
-  const [formFull, setFormFull] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
   const toggleVisibility = () => setIsVisible(prev => !prev);
 
   const handleChange = (e) => {
     setFormData({...formData, [e.target.name]: e.target.value})
+  }
+
+  const handleGenerateSecurePassword = (length = 24) => {
+    const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+[]{}|;:,.<>?";
+    const randomBytes = CryptoJS.lib.WordArray.random(length).toString(CryptoJS.enc.Hex);
+
+    let password = "";
+    for (let i = 0; i < length; i++) {
+        const randomIndex = parseInt(randomBytes.substr(i * 2, 2), 16) % charset.length;
+        password += charset[randomIndex];
+    }
+    setFormData(prevFormData => ({ ...prevFormData, password }));
   }
 
   const handleSubmit = (e) => {
@@ -48,7 +60,7 @@ function PasswordForm({ addPassword }) {
           </div>
         </div>
         <button className='btn bg-primary text-light my-3' type='submit'>Add Password</button>   
-        <button className='btn ms-2 text-decoration-underline' type='button'>Generate Secure Password</button>
+        <button className='btn ms-2 text-decoration-underline' type='button' onClick={() => handleGenerateSecurePassword(24)}>Generate Secure Password</button>
       </form>
     </div>
   

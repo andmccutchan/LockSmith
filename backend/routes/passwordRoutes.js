@@ -32,7 +32,7 @@ const verifyToken = (req, res, next) => {
 // Route to get all saved passwords for the authenticated user
 router.get("/dashboard", verifyToken, async (req, res) => {
   try {
-    console.log("Encryption Key:", SECRET_KEY);
+    // console.log("Encryption Key:", SECRET_KEY);
 
     const passwords = await UserPasswords.find({ userId: req.userId });
     const decryptedPassword = passwords.map((passwordEntry) => ({

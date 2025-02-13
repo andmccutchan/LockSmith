@@ -38,16 +38,11 @@ function PasswordInfo({website, username, password, onDelete}) {
     };
 
     const handleSave = async () => {
-        try {
-            await axios.post("localhost:5001/api/dashboard")
             setOriginalUsername(editedUsername);
             setOriginalPassword(editedPassword);
             setIsEditing(false);
             setUserIsCopied(false);
             setPasswordIsCopied(false);
-        } catch (err) {
-
-        }
     };
 
     const handleCancel = () => {
