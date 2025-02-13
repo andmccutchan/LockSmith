@@ -9,8 +9,13 @@ function PasswordForm({ addPassword }) {
     password: ''
   });
   const [isVisible, setIsVisible] = useState(false);
+  const [inAddView, setInAddView] = useState(false);
 
   const toggleVisibility = () => setIsVisible(prev => !prev);
+  const handleInAddView = () => {
+    setInAddView(prev => !prev);
+    setFormData({website: '', username: '', password: ''});
+  }
 
   const handleChange = (e) => {
     setFormData({...formData, [e.target.name]: e.target.value})
@@ -35,33 +40,51 @@ function PasswordForm({ addPassword }) {
     };
     addPassword(formData);
     setFormData({website: '', username: '', password: ''});
+    setInAddView(false);
   }
 
   return (
-    <div className='container rounded m-2 p-3'>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label className='form-label' htmlFor="websitePassword">Website URL</label>
-          <input className='form-control' type="text" name="website" id="websitePassword" value={formData.website} onChange={handleChange} />
-        </div>
-        <div>
-          <label className='form-label' htmlFor="username">Username/Email</label>
-          <input className='form-control' type="text" name="username" id="username" value={formData.username} onChange={handleChange} />
-        </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <div className='d-flex'>
-            <input className='form-control' type={isVisible ? "text" : "password"} name="password" id="password" value={formData.password} onChange={handleChange} />
-            {isVisible ? (
-              <button className='btn border-0' onClick={toggleVisibility} type='button'><i className="fa-regular fa-eye-slash"></i></button>
-            ) : (
-              <button className='btn border-0' onClick={toggleVisibility} type='button'><i className="fa-regular fa-eye"></i></button>
-            )}
+    <div className='container-fluid rounded m-2 p-3'>
+      {inAddView ? (
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label className='form-label' htmlFor="websitePassword">Website URL</label>
+            <input className='form-control' type="text" name="website" id="websitePassword" value={formData.website} onChange={handleChange} />
           </div>
-        </div>
-        <button className='btn bg-primary text-light my-3' type='submit'>Add Password</button>   
-        <button className='btn ms-2 text-decoration-underline' type='button' onClick={() => handleGenerateSecurePassword(24)}>Generate Secure Password</button>
-      </form>
+          <div>
+            <label className='form-label' htmlFor="username">Username/Email</label>
+            <input className='form-control' type="text" name="username" id="username" value={formData.username} onChange={handleChange} />
+          </div>
+          <div>
+            <label htmlFor="password">Password</label>
+            <div className='d-flex'>
+              <input className='form-control' type={isVisible ? "text" : "password"} name="password" id="password" value={formData.password} onChange={handleChange} />
+              {isVisible ? (
+                <button className='btn border-0' onClick={toggleVisibility} type='button'><i className="fa-regular fa-eye-slash"></i></button>
+              ) : (
+                <button className='btn border-0' onClick={toggleVisibility} type='button'><i className="fa-regular fa-eye"></i></button>
+              )}
+            </div>
+          </div>
+          <div className='d-flex justify-content-between'>
+            <div className='d-flex align-items-center'>
+              <button className='btn btn-danger' onClick={handleInAddView}>Cancel</button>
+            </div>
+            <div className=''>
+              <button
+                className='btn ms-2 text-decoration-underline'
+                type='button'
+                onClick={() => handleGenerateSecurePassword(24)}
+              >
+                Generate Secure Password
+              </button>
+              <button className='btn bg-primary text-light my-3' type='submit'>Add Password</button>
+            </div>
+          </div>
+        </form>
+      ) : (
+        <button className='btn btn-success' onClick={handleInAddView}><i className="fa-solid fa-plus me-2"></i>New Item</button>
+      )}
     </div>
   
   )
