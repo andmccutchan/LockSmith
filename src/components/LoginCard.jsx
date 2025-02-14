@@ -32,7 +32,7 @@ function LoginCard() {
 
   return (
     <div>
-        <form onSubmit={handleSubmit} className='card p-3 mx-auto w-25 bg-body-tertiary text-dark my-5 py-4'>
+        <form onSubmit={handleSubmit} className='card p-4 bg-body-tertiary text-dark'>
             <div>
                 <div className="d-flex justify-content-center align-items-center">
                     <img className="px-1" src="src/assets/lock-closed-svgrepo-com.svg" alt="Lock logo" />

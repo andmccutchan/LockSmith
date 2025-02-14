@@ -4,7 +4,7 @@ import SignUpCard from "../components/SignUpCard";
 
 function Register() {
   return (
-    <div>
+    <div className="register-page">
       <SignUpCard />
     </div>
   );

@@ -1,3 +1,10 @@
+.page-body {
+    background-image: url('/src/assets/cool-background.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
 .user-pass-info {
     font-size: 0.8rem;
 }
