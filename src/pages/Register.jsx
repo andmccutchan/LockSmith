@@ -1,14 +1,13 @@
 // Register.jsx
-import React, { useState } from "react";
+import React from "react";
 import SignUpCard from "../components/SignUpCard";
 
-function Home() {
+function Register() {
   return (
     <div>
-      <h1 className="text-center mt-5">Sign Up</h1>
       <SignUpCard />
     </div>
   );
 }
 
-export default Home;
+export default Register;

@@ -81,10 +81,13 @@ function PasswordInfo({website, username, password, onDelete}) {
   return (
     <>
         <div className="d-flex justify-content-between my-1"> 
-            <motion.div className='d-flex p-0' whileHover={{
-                scale: 1.05,
-                transition: { duration: 0.1 },
-            }}>
+            <motion.div 
+                className='d-flex p-0' 
+                whileHover={{
+                    scale: 1.05,
+                    transition: { duration: 0.1 },
+                }}
+            >
                 <img className='mx-2 border-0' src={faviconUrl} width="24" height="24" onError={handleFaviconError} />
                 <div className='d-flex flex-column'>
                     <p className='m-0 p-0'>{website}</p>

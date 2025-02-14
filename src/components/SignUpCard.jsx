@@ -33,7 +33,7 @@ function SignUpCard() {
     <div>
         <form onSubmit={handleSubmit} className='card p-3 mx-auto w-25 bg-body-tertiary text-dark my-5 py-4'>
             <div>
-                <h2 className='text-center my-2'>Create an account</h2>
+                <h2 className='text-center my-2'>Creat a Lock<span className='text-primary'>Smith</span> account</h2>
             </div>
             <div className="mb-3">
                 <label htmlFor="userEmail" className="form-label">Email</label>

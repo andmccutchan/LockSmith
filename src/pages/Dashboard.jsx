@@ -3,9 +3,11 @@ import React, { useState, useEffect } from "react";
 import PasswordForm from "../components/PasswordForm";
 import PasswordInfo from "../components/PasswordInfo";
 import axios from "axios";
+import InfoBox from "../components/InfoBox";
 
 function Dashboard() {
   const [passwordInfo, setPasswordInfo] = useState([]);
+  const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchPasswords = async () => {
@@ -42,6 +44,7 @@ function Dashboard() {
       // console.log("Password being added:", newPassword);
       
       setPasswordInfo((prevPasswords) => [...prevPasswords, newPassword]);
+      setModalOpen(false)
     } catch (err) {
       console.error("Error submitting form", err);
     }
@@ -63,28 +66,32 @@ function Dashboard() {
   }
   
   return (
-      <>
-        <div className="d-flex flex-grow-1 w-100">
-          <div className='container rounded m-2 p-3 overflow-auto border passwords-list flex-grow-1 shadow'>
-            <h3>Accounts</h3>
-            <hr />
-            {passwordInfo.map((entry, index) => (
-              <PasswordInfo
-                key={index}
-                website={entry.website}
-                username={entry.username}
-                password={entry.password}
-                onDelete={() => deletePassword(entry._id)}
-              />
-            ))}
-          </div>
-          <div className="container-fluid d-flex m-2 border rounded shadow p-3">
-            <h3>Dashboard</h3>
-            <hr />
-            {/* <PasswordForm addPassword={addPassword} /> */}
+    <>
+      <div className="d-flex flex-grow-1 w-100">
+        <div className='container rounded m-2 p-3 overflow-auto border passwords-list flex-grow-1 shadow'>
+          <h3>Accounts</h3>
+          <hr />
+          {passwordInfo.map((entry, index) => (
+            <PasswordInfo
+              key={index}
+              website={entry.website}
+              username={entry.username}
+              password={entry.password}
+              onDelete={() => deletePassword(entry._id)}
+            />
+          ))}
+        </div>
+        <div className="container-fluid d-block m-2 border rounded shadow p-3">
+          <h3>Dashboard</h3> 
+          <hr />
+          <div className="d-flex w-100 justify-content-end">
+            <button className="btn btn-primary mx-1">Add Tag</button>
+            <button className="btn btn-primary mx-1">Create Group</button>
+            <button className='btn btn-primary ms-1' onClick={() => setModalOpen(true)}><i className="fa-solid fa-plus me-2"></i>New Item</button>
           </div>
         </div>
-      </>
+      </div>
+    </>
   )
 }
 
