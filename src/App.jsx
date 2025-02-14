@@ -13,20 +13,20 @@ import { AuthProvider } from "./components/AuthContext";
 function App() {
   return (
     <AuthProvider>
-      <div className="d-flex flex-column min-vh-100 bg-body-tertiary page-body">
-          <Header />
-          <div className="d-flex flex-column flex-grow-1 justify-content-start">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-              <Route element={<ProtectedRoute />} >
-                <Route path="/dashboard" element={<Dashboard />} />
-              </Route>
-              <Route path="/settings" element={<Settings />} />
-            </Routes>
-          </div>
-          <Footer />
+      <div className="d-flex flex-column min-vh-100 bg-body-tertiary gradient-background">
+        <Header />
+        <div className="d-flex flex-column flex-grow-1 justify-content-start">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route element={<ProtectedRoute />} >
+              <Route path="/dashboard" element={<Dashboard />} />
+            </Route>
+            <Route path="/settings" element={<Settings />} />
+          </Routes>
+        </div>
+        <Footer />
       </div>
     </AuthProvider>
   );
