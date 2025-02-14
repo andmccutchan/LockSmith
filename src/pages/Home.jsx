@@ -5,6 +5,7 @@ function Home() {
   return (
     <div>
       <h1 className="text-center fw-medium mt-5"></h1>
+      {/* :) */}
     </div>
     
   )
