@@ -68,7 +68,7 @@ function Dashboard() {
   return (
     <>
       <div className="d-flex flex-grow-1 w-100">
-        <div className='container rounded m-2 p-3 overflow-auto border passwords-list flex-grow-1 shadow bg-body'>
+        <div className='container rounded p-3 my-2 ms-2 overflow-auto border passwords-list flex-grow-1 shadow bg-body'>
           <h3>Accounts</h3>
           <hr />
           {passwordInfo.map((entry, index) => (
@@ -81,7 +81,7 @@ function Dashboard() {
             />
           ))}
         </div>
-        <div className="container-fluid d-block m-2 border rounded shadow p-3 bg-body">
+        <div className="container-fluid d-block border rounded shadow p-3 m-2 bg-body">
           <h3>Dashboard</h3> 
           <hr />
           <div className="d-flex w-100 justify-content-end">
