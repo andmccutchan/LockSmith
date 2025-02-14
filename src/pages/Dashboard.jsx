@@ -6,7 +6,6 @@ import axios from "axios";
 
 function Dashboard() {
   const [passwordInfo, setPasswordInfo] = useState([]);
-  const [addView, setAddView] = useState(false);
 
   useEffect(() => {
     const fetchPasswords = async () => {
@@ -65,8 +64,10 @@ function Dashboard() {
   
   return (
       <>
-        <div className="d-flex">
-          <div className='container rounded m-2 p-3 info-container overflow-auto border passwords-list'>
+        <div className="d-flex flex-grow-1 w-100">
+          <div className='container rounded m-2 p-3 overflow-auto border passwords-list flex-grow-1 shadow'>
+            <h3>Accounts</h3>
+            <hr />
             {passwordInfo.map((entry, index) => (
               <PasswordInfo
                 key={index}
@@ -77,8 +78,10 @@ function Dashboard() {
               />
             ))}
           </div>
-          <div className="container-fluid d-flex m-2 border rounded">
-              <PasswordForm addPassword={addPassword} />
+          <div className="container-fluid d-flex m-2 border rounded shadow p-3">
+            <h3>Dashboard</h3>
+            <hr />
+            {/* <PasswordForm addPassword={addPassword} /> */}
           </div>
         </div>
       </>

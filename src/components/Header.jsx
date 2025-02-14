@@ -14,10 +14,10 @@ function Header() {
 
   return (
     <header>
-      <nav className="navbar navbar-expand-lg bg-dark page-header px-3 rounded-pill my-2">
+      <nav className="navbar navbar-expand-lg bg-dark page-header px-3 rounded-pill mb-1 mt-2">
         <div className="container-fluid">
           <Link className="navbar-brand d-flex text-light" to="/" >
-            <img className="px-1" src="src/assets/lock-closed-svgrepo-com.svg" alt="Lock logo" />
+            <img className="px-1 header-lock-logo" src="src/assets/lock-closed-svgrepo-com.svg" alt="Lock logo" />
             Lock<span className="text-primary">Smith</span>
           </Link>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

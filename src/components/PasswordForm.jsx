@@ -44,7 +44,7 @@ function PasswordForm({ addPassword }) {
   }
 
   return (
-    <div className='container-fluid rounded m-2 p-3'>
+    <div className='w-100 rounded m-2 p-3'>
       {inAddView ? (
         <form 
           onSubmit={handleSubmit} 
@@ -76,6 +76,7 @@ function PasswordForm({ addPassword }) {
               <button className='btn btn-danger' onClick={handleInAddView}>Cancel</button>
             </div>
             <div>
+              <button className='btn bg-primary text-light my-3' type='submit'>Add Password</button>
               <button
                 className='btn ms-2 text-decoration-underline'
                 type='button'
@@ -83,13 +84,12 @@ function PasswordForm({ addPassword }) {
               >
                 Generate Secure Password
               </button>
-              <button className='btn bg-primary text-light my-3' type='submit'>Add Password</button>
             </div>
           </div>
         </form>
       ) : (
-        <div>
-          <button className='btn btn-success' onClick={handleInAddView}><i className="fa-solid fa-plus me-2"></i>New Item</button>
+        <div className='d-flex justify-content-end'>
+          <button className='btn btn-primary' onClick={handleInAddView}><i className="fa-solid fa-plus me-2"></i>New Item</button>
         </div>
       )}
     </div>
