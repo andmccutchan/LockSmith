@@ -14,7 +14,7 @@ function Header() {
 
   return (
     <header>
-      <nav className="navbar navbar-expand-lg bg-body-tertiary page-header px-3 rounded-pill mb-1 mt-2">
+      <nav className="navbar navbar-expand-lg bg-body-tertiary page-header px-1 rounded-pill mb-1 mt-2">
         <div className="container-fluid">
           <Link className="navbar-brand d-flex text-dark" to="/" >
             <img className="px-1 header-lock-logo" src="src/assets/lock-closed-svgrepo-com.svg" alt="Lock logo" />

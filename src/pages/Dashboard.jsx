@@ -68,26 +68,29 @@ function Dashboard() {
   return (
     <>
       <div className="d-flex flex-grow-1 w-100">
-        <div className='container rounded p-3 my-2 ms-2 overflow-auto border passwords-list flex-grow-1 shadow bg-body'>
-          <h3>Accounts</h3>
-          <hr />
-          {passwordInfo.map((entry, index) => (
-            <PasswordInfo
-              key={index}
-              website={entry.website}
-              username={entry.username}
-              password={entry.password}
-              onDelete={() => deletePassword(entry._id)}
-            />
-          ))}
+        <div className='container rounded p-3 my-2 ms-2 mb-1 overflow-auto border passwords-list flex-grow-1 shadow bg-body'>
+          <div className="d-flex flex-column h-100">
+            <h3 className="mb-3">Accounts</h3>
+              {passwordInfo.map((entry, index) => (
+                <PasswordInfo
+                  key={index}
+                  website={entry.website}
+                  username={entry.username}
+                  password={entry.password}
+                  onDelete={() => deletePassword(entry._id)}
+                />
+              ))}
+          </div>
         </div>
-        <div className="container-fluid d-block border rounded shadow p-3 m-2 bg-body">
-          <h3>Dashboard</h3> 
-          <hr />
-          <div className="d-flex w-100 justify-content-end">
-            <button className="btn btn-primary mx-1">Add Tag</button>
-            <button className="btn btn-primary mx-1">Create Group</button>
-            <button className='btn btn-primary ms-1' onClick={() => setModalOpen(true)}><i className="fa-solid fa-plus me-2"></i>New Item</button>
+        <div className="container-fluid d-flex flex-column border rounded shadow p-3 m-2 mb-1 bg-body">
+          <div className="d-flex align-items center">
+            <h3>Dashboard</h3>
+            <div className="d-flex w-100 justify-content-end">
+              <button className="btn btn-primary mx-1">Add Tag</button>
+              <button className="btn btn-primary mx-1">Create Group</button>
+              <button className='btn btn-primary ms-1' onClick={() => setModalOpen(true)}><i className="fa-solid fa-plus me-2"></i>New Item</button>
+            </div>
+            <PasswordForm addPassword={addPassword} />
           </div>
         </div>
       </div>
