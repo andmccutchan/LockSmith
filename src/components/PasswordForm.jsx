@@ -20,14 +20,16 @@ function PasswordForm({ addPassword }) {
     setFormData({...formData, [e.target.name]: e.target.value})
   }
 
-  const handleGenerateSecurePassword = (length = 24) => {
-    const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+[]{}|;:,.<>?";
-    const randomBytes = CryptoJS.lib.WordArray.random(length).toString(CryptoJS.enc.Hex);
+  const handleCancel = () => {
+    setFormData({website: '', username: '', password: ''})
+  }
 
+  const handleGenerateSecurePassword = (length = 18) => {
+    const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+[]{}|;:,.<>?";
     let password = "";
     for (let i = 0; i < length; i++) {
-        const randomIndex = parseInt(randomBytes.substr(i * 2, 2), 16) % charset.length;
-        password += charset[randomIndex];
+      const randomIndex = Math.floor(Math.random() * charset.length);
+      password += charset[randomIndex];
     }
     setFormData(prevFormData => ({ ...prevFormData, password }));
   }
@@ -70,14 +72,14 @@ function PasswordForm({ addPassword }) {
         </div>
         <div className='d-flex justify-content-between'>
           <div className='d-flex align-items-center'>
-            <button className='btn btn-danger' onClick={handleInAddView}>Cancel</button>
+            <button className='btn btn-danger' onClick={handleCancel}>Cancel</button>
           </div>
           <div>
             <button className='btn bg-primary text-light my-3' type='submit'>Add Password</button>
             <button
               className='btn ms-2 text-decoration-underline'
               type='button'
-              onClick={() => handleGenerateSecurePassword(24)}
+              onClick={() => handleGenerateSecurePassword()}
             >
               Generate Secure Password
             </button>

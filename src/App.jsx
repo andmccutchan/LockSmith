@@ -23,7 +23,7 @@ function App() {
             <Route element={<ProtectedRoute />} >
               <Route path="/dashboard" element={<Dashboard />} />
             </Route>
-            <Route path="/settings" element={<Settings />} />
+            {/* <Route path="/settings" element={<Settings />} /> */}
           </Routes>
         </div>
         <Footer />

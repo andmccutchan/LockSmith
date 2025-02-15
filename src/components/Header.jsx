@@ -34,9 +34,9 @@ function Header() {
               
               {isLoggedIn ? (
                 <>
-                  <li className="nav-item">
+                  {/* <li className="nav-item">
                     <Link className="nav-link text-dark" to="/settings">Settings</Link>
-                  </li>
+                  </li> */}
                   <li className="nav-item mx-2">
                     <button className="btn btn-link nav-link text-decoration-underline text-dark" onClick={handleLogout}>Log out</button>
                   </li>
