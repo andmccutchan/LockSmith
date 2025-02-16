@@ -3,12 +3,11 @@ import React, { useState, useEffect } from "react";
 import PasswordForm from "../components/PasswordForm";
 import PasswordInfo from "../components/PasswordInfo";
 import axios from "axios";
-import InfoBox from "../components/InfoBox";
-import { div, p } from "framer-motion/m";
 
 function Dashboard() {
   const [passwordInfo, setPasswordInfo] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [addingPassword, setAddingPassword] = useState(false);
 
   useEffect(() => {
     const fetchPasswords = async () => {
@@ -63,17 +62,20 @@ function Dashboard() {
       console.error("Error deleting password", err);
     }
   }
+
+  const handleAddingPassowrd = () => setAddingPassword(false);
+  const closePassword = () => setAddingPassword(true);
   
   return (
     isLoading ? (
-        <div className="d-flex justify-content-center mt-5 text-light vh-100 w-100"><h1>LOADING</h1></div>
+        <div className="d-flex justify-content-center mt-5 text-light vh-100 w-100"><h1>LOADING...</h1></div>
       ) : (
       <>
         <div className="d-flex flex-grow-1 w-100">
-          <div className='container rounded p-3 my-2 ms-2 mb-1 overflow-auto border passwords-list flex-grow-1 shadow bg-body'>
-            <div className="d-flex flex-column h-100">
+          <div className='d-flex rounded p-3 my-2 ms-2 mb-1 border passwords-list flex-grow-1 shadow bg-body mh-100'>
+            <div className="d-flex flex-column mh-100 w-100">
               <h3 className="mb-3">Accounts</h3>
-                {passwordInfo.map((entry, index) => (
+                {passwordInfo.map((entry, _) => (
                   <PasswordInfo
                     key={entry._id}
                     website={entry.website}
@@ -90,10 +92,14 @@ function Dashboard() {
               <div className="d-flex w-100 justify-content-end">
                 <button className="btn btn-primary mx-1">Add Tag</button>
                 <button className="btn btn-primary mx-1">Create Group</button>
-                <button className='btn btn-primary ms-1'><i className="fa-solid fa-plus me-2"></i>New Item</button>
+                <button className='btn btn-primary ms-1' onClick={handleAddingPassowrd}><i className="fa-solid fa-plus me-2"></i>New Item</button>
               </div>
             </div>
-              <PasswordForm addPassword={addPassword} />
+            {!addingPassword ? (
+              <PasswordForm addPassword={addPassword} closePassword={closePassword} />
+            ) : (
+              null
+            )}
           </div>
         </div>
       </>

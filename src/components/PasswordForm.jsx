@@ -1,8 +1,7 @@
 //PasswordForm.jsx
 import React, { useState } from 'react'
-import CryptoJS from 'crypto-js';
 
-function PasswordForm({ addPassword }) {
+function PasswordForm({ addPassword, closePassword }) {
   const [formData, setFormData] = useState({
     website: '',
     username: '',
@@ -11,17 +10,9 @@ function PasswordForm({ addPassword }) {
   const [isVisible, setIsVisible] = useState(false);
 
   const toggleVisibility = () => setIsVisible(prev => !prev);
-  const handleInAddView = () => {
-    setInAddView(prev => !prev);
-    setFormData({website: '', username: '', password: ''});
-  }
 
   const handleChange = (e) => {
     setFormData({...formData, [e.target.name]: e.target.value})
-  }
-
-  const handleCancel = () => {
-    setFormData({website: '', username: '', password: ''})
   }
 
   const handleGenerateSecurePassword = (length = 18) => {
@@ -41,7 +32,12 @@ function PasswordForm({ addPassword }) {
     };
     addPassword(formData);
     setFormData({website: '', username: '', password: ''});
-   }
+  }
+
+  const handleCloseForm = () => {
+    setFormData({website: '', username: '', password: ''})
+    closePassword();
+  }
 
   return (
     <div className='w-100 rounded'>
@@ -72,7 +68,7 @@ function PasswordForm({ addPassword }) {
         </div>
         <div className='d-flex justify-content-between'>
           <div className='d-flex align-items-center'>
-            <button className='btn btn-danger' onClick={handleCancel}>Cancel</button>
+            <button className='btn btn-danger' onClick={handleCloseForm}>Cancel</button>
           </div>
           <div>
             <button className='btn bg-primary text-light my-3' type='submit'>Add Password</button>
