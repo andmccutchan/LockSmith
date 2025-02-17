@@ -82,7 +82,7 @@ function Dashboard() {
   
   return (
     isLoading ? (
-        <div className="d-flex justify-content-center mt-5 text-light vh-100 w-100"><h1>LOADING...</h1></div>
+        <div className="d-flex justify-content-center mt-5 text-light vh-100 w-100"><h1 className="text-dark">LOADING...</h1></div>
       ) : (
       <>
         <div className="d-flex flex-grow-1 w-100">
@@ -96,15 +96,19 @@ function Dashboard() {
                 onChange={handleSearchChange}  
                 placeholder="Search by website or username"
               /> 
-              {filteredPasswords.map((entry, _) => (
-                <PasswordInfo
-                  key={entry._id}
-                  website={entry.website}
-                  username={entry.username}
-                  password={entry.password}
-                  onDelete={() => deletePassword(entry._id)}
-                />
-              ))}
+              {filteredPasswords.length > 0 ? (
+                filteredPasswords.map((entry) => (
+                  <PasswordInfo
+                    key={entry._id}
+                    website={entry.website}
+                    username={entry.username}
+                    password={entry.password}
+                    onDelete={() => deletePassword(entry._id)}
+                  />
+                ))
+              ) : (
+                <p className="text-center fw-light">App passwords to see them here...</p>
+              )}
             </div>
           </div>
           <div className="container-fluid d-flex flex-column border rounded shadow p-3 m-2 mb-1 bg-body">
@@ -120,9 +124,9 @@ function Dashboard() {
               {addingPassword ? (
                 
                   <motion.div
-                    initial={{ y: -20, opacity: 0 }}
+                    initial={{ y: -5, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
-                    exit={{ y: -20, opacity: 0 }}
+                    exit={{ y: -5, opacity: 0 }}
                     transition={{ duration: 0.15, ease: "easeInOut" }}
                   >
                     <PasswordForm addPassword={addPassword} closePassword={closePassword} />
