@@ -37,13 +37,16 @@ function Dashboard() {
   const addPassword = async (newPassword) => {
     try {
       const token = localStorage.getItem("token");
+
+      if (!token)  throw new Error("No token found in local storage");
+
       const res = await axios.post("http://localhost:5001/api/dashboard", newPassword, { 
         headers: { Authorization: `Bearer ${token}` }
       });    
 
       console.log("Added password response:", res.data);
       
-      setPasswordInfo((prevPasswords) => [...prevPasswords, newPassword]);
+      setPasswordInfo((prevPasswords) => [...prevPasswords, res.data]);
     } catch (err) {
       console.error("Error submitting form", err);
     }
@@ -58,13 +61,13 @@ function Dashboard() {
       });
   
       // Remove the password from the frontend state (UI)
-      setPasswordInfo(passwordInfo.filter((entry) => entry._id !== id));
+      setPasswordInfo((prevPasswords) => prevPasswords.filter((entry) => entry._id !== id));
     } catch (err) {
       console.error("Error deleting password", err);
     }
   }
 
-  const handleAddingPassowrd = () => setAddingPassword(true);
+  const handleAddingPassoword = () => setAddingPassword(true);
   const closePassword = () => setAddingPassword(false);
   
   return (
@@ -93,7 +96,7 @@ function Dashboard() {
               <div className="d-flex w-100 justify-content-end">
                 <button className="btn btn-primary mx-1">Add Tag</button>
                 <button className="btn btn-primary mx-1">Create Group</button>
-                <button className='btn btn-primary ms-1' onClick={handleAddingPassowrd}><i className="fa-solid fa-plus me-2"></i>New Item</button>
+                <button className='btn btn-primary ms-1' onClick={handleAddingPassoword}><i className="fa-solid fa-plus me-2"></i>New Item</button>
               </div>
             </div>
             <AnimatePresence>

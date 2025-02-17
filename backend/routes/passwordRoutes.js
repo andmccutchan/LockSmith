@@ -65,8 +65,14 @@ router.post("/dashboard", verifyToken, async (req, res) => {
       password: encryptedPassword
     });
 
-    await newPassword.save();
-    res.status(201).json({ message: "Password added successfully" });
+    const savedPassword = await newPassword.save();
+
+    res.status(201).json({
+      _id: savedPassword._id,
+      website: savedPassword.website,
+      username: savedPassword.username,
+      password,
+    });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Error adding password" });

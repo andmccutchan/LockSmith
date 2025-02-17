@@ -14,7 +14,7 @@ function PasswordInfo({website, username, password, onDelete}) {
     const [editedUsername, setEditedUsername] = useState(username);
     const [editedPassword, setEditedPassword] = useState(password);
     
-    const faviconUrl = `${new URL(website).origin}/favicon.ico`;
+    const faviconUrl = `https://www.google.com/s2/favicons?domain=${website}&sz=64`;
     const globeIcon = "https://img.icons8.com/?size=100&id=3685&format=png&color=000000";
 
     const handleCloseCard = () => {
