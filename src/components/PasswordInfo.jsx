@@ -1,5 +1,5 @@
 //PasswordInfo.jsx
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { AnimatePresence, motion } from 'framer-motion';
 import axios from 'axios';
 
@@ -13,9 +13,14 @@ function PasswordInfo({website, username, password, onDelete}) {
     const [originalPassword, setOriginalPassword] = useState(password);
     const [editedUsername, setEditedUsername] = useState(username);
     const [editedPassword, setEditedPassword] = useState(password);
+    const [websiteURLTitle, setWebsiteURLTitle] = useState("");
     
+    //URL to get icons from websites
     const faviconUrl = `https://www.google.com/s2/favicons?domain=${website}&sz=64`;
     const globeIcon = "https://img.icons8.com/?size=100&id=3685&format=png&color=000000";
+
+    const handleOpenCard = () => setViewCard(true);
+    const toggleVisibility = () => setIsVisible(prev => !prev);
 
     const handleCloseCard = () => {
         setViewCard(false);
@@ -26,9 +31,6 @@ function PasswordInfo({website, username, password, onDelete}) {
         setEditedPassword(originalPassword);
     }
 
-    const handleOpenCard = () => setViewCard(true);
-    const toggleVisibility = () => setIsVisible(prev => !prev);
-
     const handleEditClick = () => {
         setIsEditing(true);
         setEditedUsername(originalUsername);
@@ -38,11 +40,36 @@ function PasswordInfo({website, username, password, onDelete}) {
     };
 
     const handleSave = async () => {
-            setOriginalUsername(editedUsername);
-            setOriginalPassword(editedPassword);
-            setIsEditing(false);
-            setUserIsCopied(false);
-            setPasswordIsCopied(false);
+        try {
+            const token = localStorage.getItem("token");
+
+            if (!token) {
+                console.error("No token found in local storage");
+                return;
+            }
+
+            const updatedInfo = {
+                website,
+                username: editedUsername,
+                password: editedPassword
+            };
+
+            const response = await axios.put('http://localhost:5001/api/update-password', updatedInfo, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+
+            if (response.status === 200) {
+                setOriginalUsername(editedUsername);
+                setOriginalPassword(editedPassword);
+                setIsEditing(false);
+                setUserIsCopied(false);
+                setPasswordIsCopied(false);
+            }
+        } catch (err) {
+            console.error("Error adding new info:", err);
+        }
+
+
     };
 
     const handleCancel = () => {
@@ -76,6 +103,23 @@ function PasswordInfo({website, username, password, onDelete}) {
     const handleFaviconError = (e) => {
         e.target.src = globeIcon;
     };
+
+    useEffect(() => {
+        const getWebsiteName = (website) => {
+            try {
+                let hostname = new URL(website).hostname; 
+                hostname = hostname.replace(/^www\./, "").replace(/\.\w+$/, "");
+                hostname = hostname.charAt(0).toUpperCase() + hostname.slice(1);
+                setWebsiteURLTitle(hostname);
+            } catch (error) {
+                console.error("Invalid URL:", website);
+                setWebsiteURLTitle(website);
+            }
+        };
+
+        getWebsiteName(website);
+    }, [website]);
+    
     
 
   return (
@@ -90,7 +134,7 @@ function PasswordInfo({website, username, password, onDelete}) {
             >
                 <img className='mx-2 border-0' src={faviconUrl} width="24" height="24" onError={handleFaviconError} />
                 <div className='d-flex flex-column'>
-                    <p className='m-0 p-0'>{website}</p>
+                    <p className='m-0 p-0'>{websiteURLTitle}</p>
                     <p className='m-0 fw-lighter user-pass-info'>{username}</p>
                 </div>
             </motion.div>
@@ -110,7 +154,7 @@ function PasswordInfo({website, username, password, onDelete}) {
                                 {isEditing ? (
                                     <>
                                         <button className='btn mx-2 border-0' onClick={handleCancel}>Cancel</button>
-                                        <button className='btn btn-primary border-0' onClick={handleSave}>Save</button>
+                                        <button className='btn btn-primary border-0' onClick={() => handleSave()}>Save</button>
                                     </>
                                 ) : (
                                         <>

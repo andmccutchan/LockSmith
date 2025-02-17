@@ -9,6 +9,7 @@ function Dashboard() {
   const [passwordInfo, setPasswordInfo] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [addingPassword, setAddingPassword] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     const fetchPasswords = async () => {
@@ -32,6 +33,15 @@ function Dashboard() {
   
     fetchPasswords();
   }, []);
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);  // Step 2: Update the search term
+  };
+
+  const filteredPasswords = passwordInfo.filter(entry => 
+    entry.website.toLowerCase().includes(searchTerm.toLowerCase()) || 
+    entry.username.toLowerCase().includes(searchTerm.toLowerCase())
+  );
   
 
   const addPassword = async (newPassword) => {
@@ -79,23 +89,30 @@ function Dashboard() {
           <div className='d-flex rounded p-3 my-2 ms-2 mb-1 border passwords-list flex-grow-1 shadow bg-body mh-100'>
             <div className="d-flex flex-column mh-100 w-100">
               <h3 className="mb-3">Accounts</h3>
-                {passwordInfo.map((entry, _) => (
-                  <PasswordInfo
-                    key={entry._id}
-                    website={entry.website}
-                    username={entry.username}
-                    password={entry.password}
-                    onDelete={() => deletePassword(entry._id)}
-                  />
-                ))}
+              <input
+                className="form-control mb-3"
+                type="text"
+                value={searchTerm}
+                onChange={handleSearchChange}  
+                placeholder="Search by website or username"
+              /> 
+              {filteredPasswords.map((entry, _) => (
+                <PasswordInfo
+                  key={entry._id}
+                  website={entry.website}
+                  username={entry.username}
+                  password={entry.password}
+                  onDelete={() => deletePassword(entry._id)}
+                />
+              ))}
             </div>
           </div>
           <div className="container-fluid d-flex flex-column border rounded shadow p-3 m-2 mb-1 bg-body">
             <div className="d-flex align-items center">
               <h3>Dashboard</h3>
               <div className="d-flex w-100 justify-content-end">
-                <button className="btn btn-primary mx-1">Add Tag</button>
-                <button className="btn btn-primary mx-1">Create Group</button>
+                {/* <button className="btn btn-primary mx-1">Add Tag</button>
+                <button className="btn btn-primary mx-1">Create Group</button> */} 
                 <button className='btn btn-primary ms-1' onClick={handleAddingPassoword}><i className="fa-solid fa-plus me-2"></i>New Item</button>
               </div>
             </div>

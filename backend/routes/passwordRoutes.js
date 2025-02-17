@@ -82,24 +82,46 @@ router.post("/dashboard", verifyToken, async (req, res) => {
 // Route to delete a password
 router.delete("/dashboard/:id", verifyToken, async (req, res) => {
   console.log("Delete is tried");
-    try {
-      const { id } = req.params; // Get the password ID from the URL
-  
-      // Find and delete the password for the current user
-      const password = await UserPasswords.findOneAndDelete({
-        _id: id,
-        userId: req.userId, // Ensure the user is authorized to delete this password
-      });
-  
-      if (!password) {
-        return res.status(404).json({ message: "Password not found" });
-      }
-  
-      res.status(200).json({ message: "Password deleted successfully" });
-    } catch (err) {
-      res.status(500).json({ message: "Error deleting password", error: err.message });
+  try {
+    const { id } = req.params; // Get the password ID from the URL
+
+    // Find and delete the password for the current user
+    const password = await UserPasswords.findOneAndDelete({
+      _id: id,
+      userId: req.userId, // Ensure the user is authorized to delete this password
+    });
+
+    if (!password) {
+      return res.status(404).json({ message: "Password not found" });
     }
-  });
+
+    res.status(200).json({ message: "Password deleted successfully" });
+  } catch (err) {
+    res.status(500).json({ message: "Error deleting password", error: err.message });
+  }
+});
+
+// Route for updating password info
+app.put('/update-password', async (req, res) => {
+  const { website, username, password } = req.body;
+  try {
+      // Find and update the record in your database (example using MongoDB)
+      const updatedEntry = await PasswordModel.findOneAndUpdate(
+          { website }, // Find by website (or another unique field)
+          { username, password }, // Update values
+          { new: true } // Return updated document
+      );
+
+      if (!updatedEntry) {
+          return res.status(404).json({ message: "Entry not found" });
+      }
+
+      res.json({ message: "Update successful", data: updatedEntry });
+  } catch (err) {
+      res.status(500).json({ error: "Failed to update password info" });
+  }
+});
+
   
 
 export default router;
