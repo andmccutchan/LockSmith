@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import PasswordForm from "../components/PasswordForm";
 import PasswordInfo from "../components/PasswordInfo";
+import { AnimatePresence, motion } from 'framer-motion';
 import axios from "axios";
 
 function Dashboard() {
@@ -63,8 +64,8 @@ function Dashboard() {
     }
   }
 
-  const handleAddingPassowrd = () => setAddingPassword(false);
-  const closePassword = () => setAddingPassword(true);
+  const handleAddingPassowrd = () => setAddingPassword(true);
+  const closePassword = () => setAddingPassword(false);
   
   return (
     isLoading ? (
@@ -95,11 +96,21 @@ function Dashboard() {
                 <button className='btn btn-primary ms-1' onClick={handleAddingPassowrd}><i className="fa-solid fa-plus me-2"></i>New Item</button>
               </div>
             </div>
-            {!addingPassword ? (
-              <PasswordForm addPassword={addPassword} closePassword={closePassword} />
-            ) : (
-              null
-            )}
+            <AnimatePresence>
+              {addingPassword ? (
+                
+                  <motion.div
+                    initial={{ y: -20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ y: -20, opacity: 0 }}
+                    transition={{ duration: 0.15, ease: "easeInOut" }}
+                  >
+                    <PasswordForm addPassword={addPassword} closePassword={closePassword} />
+                  </motion.div>
+              ) : (
+                null
+              )}
+            </AnimatePresence>
           </div>
         </div>
       </>
