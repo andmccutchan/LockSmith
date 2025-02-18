@@ -46,10 +46,10 @@ function Header() {
                 ) : (
                   <>
                     <li className="nav-item">
-                      <Link className="nav-link text-dark" to="/login">Login</Link>
+                      <Link className={`nav-link ${isHomePage ? 'text-dark' : 'text-light' }`} to="/login">Login</Link>
                     </li>
                     <li className="nav-item">
-                      <Link className="nav-link" to="/register"><button type="button" className="btn btn-primary border-0 rounded-pill px-4">Sign Up</button></Link>
+                      <Link className="nav-link" to="/register"><button type="button" className={`btn btn-primary border-0 rounded-pill px-4`}>Sign Up</button></Link>
                     </li>
                   </>
                 )}
