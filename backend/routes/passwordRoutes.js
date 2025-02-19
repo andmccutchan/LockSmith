@@ -102,7 +102,7 @@ router.delete("/dashboard/:id", verifyToken, async (req, res) => {
 });
 
 // Route for updating password info
-app.put('/update-password', async (req, res) => {
+router.put('/update-password', async (req, res) => {
   const { website, username, password } = req.body;
   try {
       // Find and update the record in your database (example using MongoDB)

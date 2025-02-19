@@ -68,8 +68,6 @@ function PasswordInfo({website, username, password, onDelete}) {
         } catch (err) {
             console.error("Error adding new info:", err);
         }
-
-
     };
 
     const handleCancel = () => {
