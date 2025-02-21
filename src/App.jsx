@@ -11,15 +11,10 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import { AuthProvider } from "./components/AuthContext";
 
 function App() {
-  const location = useLocation();
-  const isHomePage = location.pathname === "/";
 
   return (
     <AuthProvider>
-      <div className={`d-flex flex-column min-vh-100 ${
-          isHomePage ? 'bg-body-tertiary gradient-background' : 'bg-body'
-        }`}
-      >
+      <div className="d-flex flex-column min-vh-100 gradient-background">
         <Header />
         <div className="d-flex flex-column flex-grow-1 justify-content-start">
           <Routes>

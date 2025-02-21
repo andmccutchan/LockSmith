@@ -82,11 +82,13 @@ function Dashboard() {
   
   return (
     isLoading ? (
-        <div className="d-flex justify-content-center mt-5 text-light vh-100 w-100"><h1 className="text-dark">LOADING...</h1></div>
+      <div className="spinner-border d-flex justify-content-center text-light" role="status">
+        <span className="visually-hidden">Loading...</span>
+      </div>
       ) : (
       <>
         <div className="d-flex flex-grow-1 w-100">
-          <div className='d-flex rounded p-3 my-2 ms-2 mb-1 border passwords-list flex-grow-1 shadow bg-body mh-100'>
+          <div className='d-flex rounded w-50 p-3 my-2 ms-2 mb-1 border passwords-list flex-grow-1 shadow bg-body mh-100'>
             <div className="d-flex flex-column mh-100 w-100">
               <h3 className="mb-3">Accounts</h3>
               <input
@@ -111,30 +113,33 @@ function Dashboard() {
               )}
             </div>
           </div>
-          <div className="container-fluid d-flex flex-column border rounded shadow p-3 m-2 mb-1 bg-body">
-            <div className="d-flex align-items center">
-              <h3>Dashboard</h3>
-              <div className="d-flex w-100 justify-content-end">
-                {/* <button className="btn btn-primary mx-1">Add Tag</button>
-                <button className="btn btn-primary mx-1">Create Group</button> */} 
-                <button className='btn btn-primary ms-1' onClick={handleAddingPassoword}><i className="fa-solid fa-plus me-2"></i>New Item</button>
+          <div className="d-flex w-50 rounded shadow p-3 m-2 mb-1 bg-body">
+            <div className="d-flex flex-column w-100 align-items-start">
+              <div className="d-flex w-100 justify-content-between">
+                <h3>Dashboard</h3>
+                <button className='btn btn-primary ms-1' onClick={handleAddingPassoword}>
+                  <i className="fa-solid fa-plus me-2"></i>New Item
+                </button>
+              </div>
+              <div className="d-flex w-100">
+                <AnimatePresence>
+                  {addingPassword ? (
+                    
+                      <motion.div
+                        className="w-100"
+                        initial={{ y: -5, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        exit={{ y: -5, opacity: 0 }}
+                        transition={{ duration: 0.15, ease: "easeInOut" }}
+                      >
+                        <PasswordForm addPassword={addPassword} closePassword={closePassword} />
+                      </motion.div>
+                  ) : (
+                    null
+                  )}
+                </AnimatePresence>
               </div>
             </div>
-            <AnimatePresence>
-              {addingPassword ? (
-                
-                  <motion.div
-                    initial={{ y: -5, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    exit={{ y: -5, opacity: 0 }}
-                    transition={{ duration: 0.15, ease: "easeInOut" }}
-                  >
-                    <PasswordForm addPassword={addPassword} closePassword={closePassword} />
-                  </motion.div>
-              ) : (
-                null
-              )}
-            </AnimatePresence>
           </div>
         </div>
       </>

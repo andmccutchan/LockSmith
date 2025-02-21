@@ -6,8 +6,6 @@ import { AuthContext } from "./AuthContext";
 function Header() {
   const { isLoggedIn, logout } = useContext(AuthContext);
   const navigate = useNavigate();
-  const location = useLocation();
-  const isHomePage = location.pathname === '/'
 
   const handleLogout = () => {
     logout();
@@ -16,9 +14,9 @@ function Header() {
 
   return (
     <header>
-      <nav className={`navbar navbar-expand-lg bg-body-tertiary shadow page-header px-1 rounded-pill mb-1 mt-2`}>
+      <nav className="navbar navbar-expand-lg bg-body-tertiary shadow page-header px-1 rounded-pill mb-1 mt-2">
         <div className="container-fluid">
-          <Link className={`navbar-brand d-flex text-dark`} to="/" >
+          <Link className="navbar-brand d-flex text-dark" to="/" >
             <img className="px-1 header-lock-logo" src="src/assets/lock-closed-svgrepo-com.svg" alt="Lock logo" />
             Lock<span className="text-primary">Smith</span>
           </Link>
@@ -28,10 +26,10 @@ function Header() {
           <div className="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
             <ul className="navbar-nav d-flex align-items-center">
               <li className="nav-item">
-                <Link className={`nav-link text-dark`} to="/">Home</Link>
+                <Link className="nav-link text-dark" to="/">Home</Link>
               </li>
               <li className="nav-item">
-                <Link className={`nav-link text-dark`} to="/dashboard">Dashboard</Link>
+                <Link className="nav-link text-dark" to="/dashboard">Dashboard</Link>
               </li>
               
               {isLoggedIn ? (
@@ -40,16 +38,16 @@ function Header() {
                     <Link className="nav-link text-dark" to="/settings">Settings</Link>
                   </li> */}
                   <li className="nav-item mx-2">
-                    <button className={`btn btn-link nav-link text-decoration-underline text-dark`} onClick={handleLogout}>Log out</button>
+                    <button className="btn btn-link nav-link text-decoration-underline text-dark" onClick={handleLogout}>Log out</button>
                   </li>
                 </>
                 ) : (
                   <>
                     <li className="nav-item">
-                      <Link className={`nav-link text-dark`} to="/login">Login</Link>
+                      <Link className="nav-link text-dark" to="/login">Login</Link>
                     </li>
                     <li className="nav-item">
-                      <Link className="nav-link" to="/register"><button type="button" className={`btn btn-primary border-0 rounded-pill px-4`}>Sign Up</button></Link>
+                      <Link className="nav-link" to="/register"><button type="button" className="btn btn-primary border-0 rounded-pill px-4">Sign Up</button></Link>
                     </li>
                   </>
                 )}
