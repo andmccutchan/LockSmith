@@ -72,7 +72,7 @@ function Header() {
                     <Link to="/register">
                       <button
                         type="button"
-                        className="btn btn-primary border-0 rounded px-4"
+                        className="btn btn-primary border-0 rounded px-4 ms-2"
                       >
                         Sign Up
                       </button>

@@ -89,8 +89,8 @@ function Dashboard() {
       </div>
       ) : (
       <>
-        <div className="d-flex flex-grow-1 mx-5 my-4">
-          <div className='d-flex rounded w-50 p-3 me-2 mb-1 border passwords-list flex-grow-1 shadow bg-body mh-100'>
+        <div className="d-flex flex-column flex-md-row flex-grow-1 mx-5 my-4">
+          <div className='d-flex rounded w-100 w-md-50 p-3 me-md-2 mb-1 border passwords-list flex-grow-1 shadow bg-body mh-100'>
             <div className="d-flex flex-column mh-100 w-100">
               <h3 className="mb-3">Accounts</h3>
               <input
@@ -115,7 +115,7 @@ function Dashboard() {
               )}
             </div>
           </div>
-          <div className="d-flex w-50 rounded shadow p-3 ms-2 mb-1 bg-body">
+          <div className="d-flex w-100 w-md-50 rounded shadow p-3 ms-md-2 mb-1 bg-body">
             <div className="d-flex flex-column w-100 align-items-start">
               <div className="d-flex w-100 justify-content-between">
                 <h3>Dashboard</h3>
