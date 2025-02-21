@@ -2,7 +2,6 @@ import express from "express";
 import UserPasswords from "../models/SavedPasswords.js"; 
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
-import bcrypt from "bcryptjs";
 import CryptoJS from "crypto-js";
 dotenv.config();
 
@@ -35,14 +34,15 @@ router.get("/dashboard", verifyToken, async (req, res) => {
     // console.log("Encryption Key:", SECRET_KEY);
 
     const passwords = await UserPasswords.find({ userId: req.userId });
-    const decryptedPassword = passwords.map((passwordEntry) => ({
+    const decryptedPassword = CryptoJS.AES.decrypt(passwordEntry.password, SECRET_KEY).toString(CryptoJS.enc.Utf8);
+    const userInfo = passwords.map((passwordEntry) => ({
       _id: passwordEntry._id,
       website: passwordEntry.website,
       username: passwordEntry.username,
-      password: CryptoJS.AES.decrypt(passwordEntry.password, SECRET_KEY).toString(CryptoJS.enc.Utf8),
+      password: decryptedPassword,
     }));
 
-    res.json(decryptedPassword);
+    res.json(userInfo);
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Error retrieving passwords" });

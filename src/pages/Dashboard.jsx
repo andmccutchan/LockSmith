@@ -119,13 +119,13 @@ function Dashboard() {
             <div className="d-flex flex-column w-100 align-items-start">
               <div className="d-flex w-100 justify-content-between">
                 <h3>Dashboard</h3>
-                <button className='btn btn-primary ms-1' onClick={handleAddingPassoword}>
+                {/* <button className='btn btn-primary ms-1' onClick={handleAddingPassoword}>
                   <i className="fa-solid fa-plus me-2"></i>New Item
-                </button>
+                </button> */}
               </div>
               <div className="d-flex w-100">
                 <AnimatePresence>
-                  {addingPassword ? (
+                  {/* {addingPassword ? ( */}
                     
                       <motion.div
                         className="w-100"
@@ -136,9 +136,9 @@ function Dashboard() {
                       >
                         <PasswordForm addPassword={addPassword} closePassword={closePassword} />
                       </motion.div>
-                  ) : (
+                  {/* ) : (
                     null
-                  )}
+                  )} */}
                 </AnimatePresence>
               </div>
             </div>

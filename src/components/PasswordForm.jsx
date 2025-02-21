@@ -69,7 +69,7 @@ function PasswordForm({ addPassword, closePassword }) {
         <div className='d-flex'>
           <div>
             <button className='btn bg-primary text-light my-3' type='submit'>Add Password</button>
-            <button className='btn btn-danger ms-2' onClick={handleCloseForm}>Cancel</button>
+            {/* <button className='btn btn-danger ms-2' onClick={handleCloseForm}>Cancel</button> */}
             <button
               className='btn ms-2 text-decoration-underline'
               type='button'
