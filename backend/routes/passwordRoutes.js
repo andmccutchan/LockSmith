@@ -34,12 +34,11 @@ router.get("/dashboard", verifyToken, async (req, res) => {
     // console.log("Encryption Key:", SECRET_KEY);
 
     const passwords = await UserPasswords.find({ userId: req.userId });
-    const decryptedPassword = CryptoJS.AES.decrypt(passwordEntry.password, SECRET_KEY).toString(CryptoJS.enc.Utf8);
     const userInfo = passwords.map((passwordEntry) => ({
       _id: passwordEntry._id,
       website: passwordEntry.website,
       username: passwordEntry.username,
-      password: decryptedPassword,
+      password: CryptoJS.AES.decrypt(passwordEntry.password, SECRET_KEY).toString(CryptoJS.enc.Utf8),
     }));
 
     res.json(userInfo);
