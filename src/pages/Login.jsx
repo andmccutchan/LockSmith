@@ -7,8 +7,7 @@ function Home() {
     <div>
       <LoginCard />
     </div>
-  )
-
+  );
 }
 
 export default Home;

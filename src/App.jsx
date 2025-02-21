@@ -11,7 +11,6 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import { AuthProvider } from "./components/AuthContext";
 
 function App() {
-
   return (
     <AuthProvider>
       <div className="d-flex flex-column min-vh-100 gradient-background">
@@ -21,7 +20,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route element={<ProtectedRoute />} >
+            <Route element={<ProtectedRoute />}>
               <Route path="/dashboard" element={<Dashboard />} />
             </Route>
             {/* <Route path="/settings" element={<Settings />} /> */}

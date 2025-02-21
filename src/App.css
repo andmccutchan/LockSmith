@@ -3,29 +3,27 @@ body {
 }
 
 .gradient-background {
-    background: linear-gradient(300deg,#2b59b4,#759ad8,#074dbd,#012868);
-    background-size: 240% 240%;
-    animation: gradient-animation 24s ease infinite;
+  background: linear-gradient(300deg, #2b59b4, #759ad8, #074dbd, #012868);
+  background-size: 240% 240%;
+  animation: gradient-animation 24s ease infinite;
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
   }
-  
-  @keyframes gradient-animation {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
+  50% {
+    background-position: 100% 50%;
   }
+  100% {
+    background-position: 0% 50%;
+  }
+}
 
 .user-pass-info {
-    font-size: 0.8rem;
+  font-size: 0.8rem;
 }
 
 .header-logo-span {
-    color: #DE3163;
+  color: #de3163;
 }
-
-

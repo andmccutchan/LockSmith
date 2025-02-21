@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 function MainHomeContent() {
-  return (
-    <div className='bg-light w-100 rounded shadow'>MainHomeContent</div>
-  )
+  return <div className="bg-light w-100 rounded shadow">MainHomeContent</div>;
 }
 
-export default MainHomeContent
+export default MainHomeContent;

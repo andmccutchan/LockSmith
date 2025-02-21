@@ -1,5 +1,5 @@
 import express from "express";
-import UserPasswords from "../models/SavedPasswords.js"; 
+import UserPasswords from "../models/SavedPasswords.js";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import CryptoJS from "crypto-js";
@@ -31,14 +31,15 @@ const verifyToken = (req, res, next) => {
 // Route to get all saved passwords for the authenticated user
 router.get("/dashboard", verifyToken, async (req, res) => {
   try {
-    // console.log("Encryption Key:", SECRET_KEY);
-
     const passwords = await UserPasswords.find({ userId: req.userId });
     const userInfo = passwords.map((passwordEntry) => ({
       _id: passwordEntry._id,
       website: passwordEntry.website,
       username: passwordEntry.username,
-      password: CryptoJS.AES.decrypt(passwordEntry.password, SECRET_KEY).toString(CryptoJS.enc.Utf8),
+      password: CryptoJS.AES.decrypt(
+        passwordEntry.password,
+        SECRET_KEY
+      ).toString(CryptoJS.enc.Utf8),
     }));
 
     res.json(userInfo);
@@ -52,16 +53,19 @@ router.get("/dashboard", verifyToken, async (req, res) => {
 router.post("/dashboard", verifyToken, async (req, res) => {
   try {
     const { website, username, password } = req.body;
-    
+
     //Encrypt password
-    const encryptedPassword = CryptoJS.AES.encrypt(password, SECRET_KEY).toString();
+    const encryptedPassword = CryptoJS.AES.encrypt(
+      password,
+      SECRET_KEY
+    ).toString();
     // console.log("UserId:", req.userId);
 
     const newPassword = new UserPasswords({
       userId: req.userId,
       website,
       username,
-      password: encryptedPassword
+      password: encryptedPassword,
     });
 
     const savedPassword = await newPassword.save();
@@ -96,15 +100,20 @@ router.delete("/dashboard/:id", verifyToken, async (req, res) => {
 
     res.status(200).json({ message: "Password deleted successfully" });
   } catch (err) {
-    res.status(500).json({ message: "Error deleting password", error: err.message });
+    res
+      .status(500)
+      .json({ message: "Error deleting password", error: err.message });
   }
 });
 
 // Route for updating password info
-router.put('/dashboard', verifyToken, async (req, res) => {
+router.put("/dashboard", verifyToken, async (req, res) => {
   const { website, username, password } = req.body;
 
-  const encryptedPassword = CryptoJS.AES.encrypt(password, SECRET_KEY).toString();
+  const encryptedPassword = CryptoJS.AES.encrypt(
+    password,
+    SECRET_KEY
+  ).toString();
 
   const updateFields = {};
   if (username) updateFields.username = username;
@@ -122,7 +131,7 @@ router.put('/dashboard', verifyToken, async (req, res) => {
     );
 
     if (!updatedEntry) {
-        return res.status(404).json({ message: "Entry not found" });
+      return res.status(404).json({ message: "Entry not found" });
     }
 
     res.json({ message: "Update successful", data: updatedEntry });
@@ -130,7 +139,5 @@ router.put('/dashboard', verifyToken, async (req, res) => {
     res.status(500).json({ error: "Failed to update password info" });
   }
 });
-
-  
 
 export default router;
