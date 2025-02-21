@@ -12,7 +12,7 @@ function Header() {
   };
 
   return (
-    <header className="mx-2">
+    <header className="mx-5">
       <nav className="navbar navbar-expand-md bg-body-tertiary shadow page-header w-100 rounded mt-2">
         <div className="container-fluid">
           <Link className="navbar-brand d-flex text-dark align-items-center" to="/">

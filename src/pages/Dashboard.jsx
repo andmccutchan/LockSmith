@@ -82,15 +82,15 @@ function Dashboard() {
   
   return (
     isLoading ? (
-      <div className="d-flex w-100 align-items-center justify-content-center">
+      <div className="d-flex w-100 align-items-center justify-content-center mt-5">
         <div className="spinner-border d-flex justify-content-center text-light" role="status">
           <span className="visually-hidden">Loading...</span>
         </div>
       </div>
       ) : (
       <>
-        <div className="d-flex flex-grow-1 w-100">
-          <div className='d-flex rounded w-50 p-3 my-2 ms-2 mb-1 border passwords-list flex-grow-1 shadow bg-body mh-100'>
+        <div className="d-flex flex-grow-1 mx-5 my-4">
+          <div className='d-flex rounded w-50 p-3 me-2 mb-1 border passwords-list flex-grow-1 shadow bg-body mh-100'>
             <div className="d-flex flex-column mh-100 w-100">
               <h3 className="mb-3">Accounts</h3>
               <input
@@ -115,7 +115,7 @@ function Dashboard() {
               )}
             </div>
           </div>
-          <div className="d-flex w-50 rounded shadow p-3 m-2 mb-1 bg-body">
+          <div className="d-flex w-50 rounded shadow p-3 ms-2 mb-1 bg-body">
             <div className="d-flex flex-column w-100 align-items-start">
               <div className="d-flex w-100 justify-content-between">
                 <h3>Dashboard</h3>
