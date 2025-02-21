@@ -52,7 +52,7 @@ function Header() {
                   </li>
                   <li className="nav-item">
                     <Link to="/register">
-                      <button type="button" className="btn btn-primary border-0 rounded-pill px-4">Sign Up</button>
+                      <button type="button" className="btn btn-primary border-0 rounded px-4">Sign Up</button>
                     </Link>
                   </li>
                 </>
