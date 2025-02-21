@@ -82,8 +82,10 @@ function Dashboard() {
   
   return (
     isLoading ? (
-      <div className="spinner-border d-flex justify-content-center text-light" role="status">
-        <span className="visually-hidden">Loading...</span>
+      <div className="d-flex w-100 align-items-center justify-content-center">
+        <div className="spinner-border d-flex justify-content-center text-light" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
       </div>
       ) : (
       <>
