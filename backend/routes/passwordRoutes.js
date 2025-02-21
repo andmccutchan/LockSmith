@@ -102,23 +102,33 @@ router.delete("/dashboard/:id", verifyToken, async (req, res) => {
 });
 
 // Route for updating password info
-router.put('/dashboard', async (req, res) => {
+router.put('/dashboard', verifyToken, async (req, res) => {
   const { website, username, password } = req.body;
+
+  const encryptedPassword = CryptoJS.AES.encrypt(password, SECRET_KEY).toString();
+
+  const updateFields = {};
+  if (username) updateFields.username = username;
+  if (password) updateFields.password = encryptedPassword;
+
+  if (Object.keys(updateFields).length === 0) {
+    return res.status(400).json({ message: "No changes provided" });
+  }
+
   try {
-      const updatedEntry = await UserPasswords.findOneAndUpdate({
-        userId: req.userId,
-        website,
-        username,
-        password
-      });
+    const updatedEntry = await UserPasswords.findOneAndUpdate(
+      { userId: req.userId, website },
+      { $set: updateFields },
+      { new: true }
+    );
 
-      if (!updatedEntry) {
-          return res.status(404).json({ message: "Entry not found" });
-      }
+    if (!updatedEntry) {
+        return res.status(404).json({ message: "Entry not found" });
+    }
 
-      res.json({ message: "Update successful", data: updatedEntry });
+    res.json({ message: "Update successful", data: updatedEntry });
   } catch (err) {
-      res.status(500).json({ error: "Failed to update password info" });
+    res.status(500).json({ error: "Failed to update password info" });
   }
 });
 

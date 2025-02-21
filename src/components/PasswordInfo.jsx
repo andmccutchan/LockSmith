@@ -48,11 +48,11 @@ function PasswordInfo({website, username, password, onDelete}) {
                 return;
             }
 
-            const updatedInfo = {
-                website,
-                username: editedUsername,
-                password: editedPassword
-            };
+            const updatedInfo = {};
+            if (editedUsername !== originalUsername) updatedInfo.username = editedUsername;
+            if (editedPassword !== originalPassword) updatedInfo.password = editedPassword;
+            updatedInfo.website = website;
+
 
             const response = await axios.put('http://localhost:5001/api/dashboard', updatedInfo, {
                 headers: { Authorization: `Bearer ${token}` }
