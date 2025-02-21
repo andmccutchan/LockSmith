@@ -5,7 +5,7 @@ import { useLocation } from "react-router";
 function Footer() {
 
   return (
-    <footer className="text-light text-center py-3 mt-2">
+    <footer className="text-light text-center py-3">
       <div className="container">
         <p className="mb-0">&copy; {new Date().getFullYear()} LockSmith | Developed by Andrew McCutchan</p>
       </div>

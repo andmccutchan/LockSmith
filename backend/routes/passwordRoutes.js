@@ -102,15 +102,15 @@ router.delete("/dashboard/:id", verifyToken, async (req, res) => {
 });
 
 // Route for updating password info
-router.put('/update-password', async (req, res) => {
+router.put('/dashboard', async (req, res) => {
   const { website, username, password } = req.body;
   try {
-      // Find and update the record in your database (example using MongoDB)
-      const updatedEntry = await PasswordModel.findOneAndUpdate(
-          { website }, // Find by website (or another unique field)
-          { username, password }, // Update values
-          { new: true } // Return updated document
-      );
+      const updatedEntry = await UserPasswords.findOneAndUpdate({
+        userId: req.userId,
+        website,
+        username,
+        password
+      });
 
       if (!updatedEntry) {
           return res.status(404).json({ message: "Entry not found" });

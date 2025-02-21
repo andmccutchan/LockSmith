@@ -54,7 +54,7 @@ function PasswordInfo({website, username, password, onDelete}) {
                 password: editedPassword
             };
 
-            const response = await axios.put('http://localhost:5001/api/update-password', updatedInfo, {
+            const response = await axios.put('http://localhost:5001/api/dashboard', updatedInfo, {
                 headers: { Authorization: `Bearer ${token}` }
             });
 
