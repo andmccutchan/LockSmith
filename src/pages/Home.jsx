@@ -9,14 +9,14 @@ function Home() {
     <>
       <div className="container-fluid d-flex flex-column px-5 mt-5">
         <div className="d-flex row w-100 mx-auto justify-content-center">
-          <div className="col-lg-6 col-md-12 d-flex flex-column align-items-center justify-content-between">
+          <div className="col-lg-12 col-md-12 d-flex flex-column align-items-center justify-content-between mb-5">
             <div>
               <h1 className="fw-medium text-light hero-title hero-title">
                 Forget your passwords
               </h1>
               <h3 className="text-light">Because LockSmith won't.</h3>
             </div>
-            <p className="text-light mt-4 border border-light rounded p-3">
+            {/* <p className="text-light mt-4 border border-light rounded p-3">
               <span className="fw-bold">Why Choose LockSmith?</span>
               <br />
               Say goodbye to the hassle of forgetting passwords and managing
@@ -27,7 +27,7 @@ function Home() {
               focus on what matters most—your life—while we take care of your
               passwords. Join the thousands of users who trust LockSmith to keep
               their digital lives secure and easily accessible!
-            </p>
+            </p> */}
           </div>
           <div className="col-lg-6 col-md-12 d-flex flex-column">
             <HomepageInfo />

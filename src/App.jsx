@@ -15,7 +15,7 @@ function App() {
     <AuthProvider>
       <div className="d-flex flex-column min-vh-100 gradient-background">
         <Header />
-        <div className="d-flex flex-column flex-grow-1 justify-content-start">
+        <div className="d-flex flex-column flex-grow-1 justify-content-start mx-3">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />

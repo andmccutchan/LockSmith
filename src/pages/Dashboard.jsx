@@ -77,7 +77,7 @@ function Dashboard() {
     }
   }
 
-  const handleAddingPassoword = () => setAddingPassword(true);
+  const handleAddingPassword = () => setAddingPassword(true);
   const closePassword = () => setAddingPassword(false);
   
   return (
@@ -89,10 +89,34 @@ function Dashboard() {
       </div>
       ) : (
       <>
-        <div className="d-flex flex-column flex-md-row flex-grow-1 mx-5 my-4">
-          <div className='d-flex rounded w-100 w-md-50 p-3 me-md-2 mb-1 border passwords-list flex-grow-1 shadow bg-body mh-100'>
-            <div className="d-flex flex-column mh-100 w-100">
-              <h3 className="mb-3">Accounts</h3>
+        <div className="d-flex flex-column flex-md-row flex-grow-1 mh-100">
+          <div className='d-flex rounded p-3 passwords-list flex-grow-1 shadow bg-body'>
+            <div className="d-flex flex-column mh-100 mx-auto w-lg-100 w-50">
+              <div className="d-flex w-100 justify-content-between align-items-center mb-2">
+                <h3 className="mb-0">Accounts</h3>
+                <p className="mb-0">Total Passwords: <span>{filteredPasswords.length}</span></p>
+                <button className='btn btn-primary text-nowrap' onClick={handleAddingPassword}>
+                    <i className="fa-solid fa-plus me-2"></i>New Item
+                </button>
+              </div>
+              <div className="d-flex w-100">
+                <AnimatePresence>
+                  {addingPassword ? (
+                    
+                      <motion.div
+                        className="w-100"
+                        initial={{ y: -5, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        exit={{ y: -5, opacity: 0 }}
+                        transition={{ duration: 0.15, ease: "easeInOut" }}
+                      >
+                        <PasswordForm addPassword={addPassword} closePassword={closePassword} />
+                      </motion.div>
+                  ) : (
+                    null
+                  )} 
+                </AnimatePresence>
+              </div>
               <input
                 className="form-control mb-3"
                 type="text"
@@ -115,17 +139,17 @@ function Dashboard() {
               )}
             </div>
           </div>
-          <div className="d-flex w-100 w-md-50 rounded shadow p-3 ms-md-2 mb-1 bg-body">
+          {/* <div className="d-flex w-100 w-md-50 rounded shadow p-3 ms-md-2 bg-body">
             <div className="d-flex flex-column w-100 align-items-start">
               <div className="d-flex w-100 justify-content-between">
                 <h3>Dashboard</h3>
-                {/* <button className='btn btn-primary ms-1' onClick={handleAddingPassoword}>
+                <button className='btn btn-primary ms-1' onClick={handleAddingPassoword}>
                   <i className="fa-solid fa-plus me-2"></i>New Item
-                </button> */}
+                </button>
               </div>
               <div className="d-flex w-100">
                 <AnimatePresence>
-                  {/* {addingPassword ? ( */}
+                  {addingPassword ? (
                     
                       <motion.div
                         className="w-100"
@@ -136,13 +160,13 @@ function Dashboard() {
                       >
                         <PasswordForm addPassword={addPassword} closePassword={closePassword} />
                       </motion.div>
-                  {/* ) : (
+                  ) : (
                     null
-                  )} */}
+                  )} 
                 </AnimatePresence>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </>
     )

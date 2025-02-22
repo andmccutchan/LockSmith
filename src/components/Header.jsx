@@ -12,8 +12,8 @@ function Header() {
   };
 
   return (
-    <header className="mx-5">
-      <nav className="navbar navbar-expand-md bg-body-tertiary shadow page-header w-100 rounded mt-2">
+    <header className="mx-3 my-3">
+      <nav className="navbar navbar-expand-md bg-body-tertiary shadow page-header w-100 rounded">
         <div className="container-fluid">
           <Link
             className="navbar-brand d-flex text-dark align-items-center"
@@ -57,7 +57,7 @@ function Header() {
                       className="btn btn-link nav-link text-decoration-underline text-dark"
                       onClick={handleLogout}
                     >
-                      Log out
+                      <i className="fa-solid fa-right-from-bracket text-primary"></i>
                     </button>
                   </li>
                 </>
