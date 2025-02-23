@@ -57,7 +57,7 @@ function PasswordInfo({ website, username, password, onDelete }) {
       updatedInfo.website = website;
 
       const response = await axios.put(
-        "http://localhost:5001/api/dashboard",
+        `${import.meta.env.VITE_API_URL}/api/dashboard`,
         updatedInfo,
         {
           headers: { Authorization: `Bearer ${token}` },

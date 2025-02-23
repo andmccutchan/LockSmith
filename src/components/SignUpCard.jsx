@@ -17,7 +17,7 @@ function SignUpCard() {
     try {
       if (user.password.length >= 8 && user.password.length <= 20) {
         const res = await axios.post(
-          "http://localhost:5001/api/auth/register",
+          `${import.meta.env.VITE_API_URL}/api/auth/register`,
           user
         );
         console.log(res.data);

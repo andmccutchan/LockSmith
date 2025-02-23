@@ -16,7 +16,10 @@ function LoginCard() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("/api/auth/login", credentials);
+      const res = await axios.post(
+        `${import.meta.env.VITE_API_URL}/api/auth/login`,
+        credentials
+      );
       // console.log("Login successful:", res.data);
 
       const { token } = res.data;
