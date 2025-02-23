@@ -21,7 +21,7 @@ function Header() {
           >
             <img
               className="px-1 header-lock-logo"
-              src="src/assets/lock-closed-svgrepo-com.svg"
+              src="/lock-closed-svgrepo-com.svg"
               alt="Lock logo"
             />
             Lock<span className="text-primary">Smith</span>

@@ -42,7 +42,7 @@ function LoginCard() {
           <div className="d-flex justify-content-center align-items-center">
             <img
               className="px-1"
-              src="src/assets/lock-closed-svgrepo-com.svg"
+              src="/lock-closed-svgrepo-com.svg"
               alt="Lock logo"
             />
             <h2 className="text-center my-2">
