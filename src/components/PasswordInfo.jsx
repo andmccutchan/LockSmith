@@ -57,7 +57,7 @@ function PasswordInfo({ website, username, password, onDelete }) {
       updatedInfo.website = website;
 
       const response = await axios.put(
-        `${import.meta.env.VITE_API_URL}/api/dashboard`,
+        `https://locksmith-1.onrender.com/api/dashboard`,
         updatedInfo,
         {
           headers: { Authorization: `Bearer ${token}` },

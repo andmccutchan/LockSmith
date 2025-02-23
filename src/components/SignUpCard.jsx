@@ -17,7 +17,7 @@ function SignUpCard() {
     try {
       if (user.password.length >= 8 && user.password.length <= 20) {
         const res = await axios.post(
-          `${import.meta.env.VITE_API_URL}/api/auth/register`,
+          `https://locksmith-1.onrender.com/api/auth/register`,
           user
         );
         console.log(res.data);
