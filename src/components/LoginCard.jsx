@@ -17,7 +17,7 @@ function LoginCard() {
     e.preventDefault();
     try {
       const res = await axios.post(
-        `https://locksmith-1.onrender.com/api/auth/login`,
+        `${import.meta.env.VITE_API_URL}/api/auth/login`,
         credentials
       );
       // console.log("Login successful:", res.data);
