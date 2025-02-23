@@ -16,10 +16,7 @@ function LoginCard() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(
-        "http://localhost:5001/api/auth/login",
-        credentials
-      );
+      const res = await axios.post("/api/auth/login", credentials);
       // console.log("Login successful:", res.data);
 
       const { token } = res.data;

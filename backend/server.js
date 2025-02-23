@@ -10,21 +10,23 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5001;
 
-app.use(cors({
-    origin: "http://localhost:5173", // Change to your frontend URL
+app.use(
+  cors({
+    origin: "lock-smith-pass.vercel.app", // Change to your frontend URL
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"],
-}));
+  })
+);
 app.use(express.json()); //Parse Json Data
 
 //Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI)
-    .then(() => console.log("MongoDB Connected"))
-    .catch((err) => console.log("MongoDB connection error:", err));
+mongoose
+  .connect(process.env.MONGODB_URI)
+  .then(() => console.log("MongoDB Connected"))
+  .catch((err) => console.log("MongoDB connection error:", err));
 
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api", passwordRoutes);
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-  
