@@ -33,65 +33,69 @@ function LoginCard() {
   };
 
   return (
-    <div>
-      <form
-        onSubmit={handleSubmit}
-        className="card p-4 bg-body-tertiary text-dark mx-auto mt-5 w-25"
-      >
-        <div>
-          <div className="d-flex justify-content-center align-items-center">
-            <img
-              className="px-1"
-              src="/lock-closed-svgrepo-com.svg"
-              alt="Lock logo"
-            />
-            <h2 className="text-center my-2">
-              Lock<span className="text-primary">Smith</span> Login
-            </h2>
-          </div>
+    <div className="container">
+      <div className="row justify-content-center">
+        <div className="col-12 col-md-8 col-lg-4">
+          <form
+            onSubmit={handleSubmit}
+            className="card p-4 bg-body-tertiary text-dark mx-auto mt-5"
+          >
+            <div className="d-flex justify-content-center align-items-center">
+              <img
+                className="px-1"
+                src="/lock-closed-svgrepo-com.svg"
+                alt="Lock logo"
+              />
+              <h2 className="text-center my-2">
+                Lock<span className="text-primary">Smith</span> Login
+              </h2>
+            </div>
+
+            <div className="mb-3">
+              <label htmlFor="userEmail" className="form-label">
+                Username
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                name="email"
+                value={credentials.email}
+                id="userEmail"
+                onChange={handleChange}
+              />
+            </div>
+
+            <div>
+              <label htmlFor="inputPassword5" className="form-label">
+                Password
+              </label>
+              <input
+                type="password"
+                id="inputPassword5"
+                className="form-control"
+                name="password"
+                value={credentials.password}
+                onChange={handleChange}
+                aria-describedby="passwordHelpBlock"
+              />
+            </div>
+
+            {error && (
+              <span className="badge text-bg-danger text-center py-2 my-3">
+                {error}
+              </span>
+            )}
+
+            <button type="submit" className="btn btn-primary mt-3">
+              Login
+            </button>
+
+            <p className="form-text text-center mt-3">
+              New to LockSmith? <Link to="/register">Sign Up</Link>
+            </p>
+          </form>
         </div>
-        <div className="mb-3">
-          <label htmlFor="userEmail" className="form-label">
-            Username
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            name="email"
-            value={credentials.email}
-            id="userEmail"
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="inputPassword5" className="form-label">
-            Password
-          </label>
-          <input
-            type="password"
-            id="inputPassword5"
-            className="form-control"
-            name="password"
-            value={credentials.password}
-            onChange={handleChange}
-            aria-describedby="passwordHelpBlock"
-          />
-        </div>
-        {error && (
-          <span className="badge text-bg-danger text-center py-2 my-3">
-            {error}
-          </span>
-        )}
-        <button type="submit" className="btn btn-primary mt-3">
-          Login
-        </button>
-        <p className="form-text text-center mt-3">
-          New to LockSmith?{" "}
-          <span>
-            <Link to="/register">Sign Up</Link>
-          </span>
-        </p>
-      </form>
+      </div>
     </div>
   );
 }
