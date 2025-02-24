@@ -10,7 +10,7 @@ function Home() {
       <div className="container-fluid d-flex flex-column px-5 mt-5">
         <div className="d-flex row w-100 mx-auto justify-content-center">
           <div className="col-lg-12 col-md-12 d-flex flex-column align-items-center justify-content-between mb-5">
-            <div>
+            <div className="d-flex flex-column align-items-center">
               <h1 className="fw-medium text-light hero-title hero-title">
                 Forget your passwords
               </h1>
