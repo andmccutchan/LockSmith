@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 5001;
 
 app.use(
   cors({
-    origin: "https://lock-smith-pass.vercel.app/", // Change to your frontend URL
+    origin: "https://locksmith.onrender.com", // Change to your frontend URL
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"],
   })
