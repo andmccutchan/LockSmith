@@ -27,3 +27,21 @@ body {
 .header-logo-span {
   color: #de3163;
 }
+
+@media (max-width: 906px) {
+  .dashboard-container {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}
+
+@media (max-width: 464px) {
+  .dashboard-title-items {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .dashboard-button {
+    width: 100% !important;
+  }
+}

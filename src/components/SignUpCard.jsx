@@ -13,14 +13,14 @@ function SignUpCard() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(user);
+    // console.log(user);
     try {
       if (user.password.length >= 8 && user.password.length <= 20) {
         const res = await axios.post(
           `${import.meta.env.VITE_API_URL}/api/auth/register`,
           user
         );
-        console.log(res.data);
+        // console.log(res.data);
         navigate("/login");
       } else if (user.password.length < 8) {
         setError("Password must be at least 8 characters");
@@ -36,8 +36,6 @@ function SignUpCard() {
     <div className="container">
       <div className="row justify-content-center">
         <div className="col-12 col-md-8 col-lg-4">
-          {" "}
-          {/* Responsive Column Width */}
           <form
             onSubmit={handleSubmit}
             className="card p-4 mx-auto bg-body-tertiary text-dark my-5"
@@ -83,9 +81,7 @@ function SignUpCard() {
             </div>
 
             {error && (
-              <span className="badge text-bg-danger text-center py-2 my-3">
-                {error}
-              </span>
+              <p className="text-bg-danger text-center py-2 my-3">{error}</p>
             )}
 
             <button type="submit" className="btn btn-primary mt-1">

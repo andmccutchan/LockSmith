@@ -32,7 +32,6 @@ function Header() {
             Lock<span className="text-primary">Smith</span>
           </Link>
 
-          {/* Toggle Button */}
           <button
             className="navbar-toggler"
             type="button"
@@ -44,7 +43,6 @@ function Header() {
             <span className="navbar-toggler-icon"></span>
           </button>
 
-          {/* Nav Links */}
           <div
             className={`collapse navbar-collapse ${navOpen ? "show" : ""}`}
             id="navbarNav"

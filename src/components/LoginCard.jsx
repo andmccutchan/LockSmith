@@ -81,7 +81,7 @@ function LoginCard() {
             </div>
 
             {error && (
-              <span className="badge text-bg-danger text-center py-2 my-3">
+              <span className=" badge text-danger text-center mt-2 text-decoration-underline">
                 {error}
               </span>
             )}

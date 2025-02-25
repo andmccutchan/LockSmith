@@ -2,7 +2,7 @@
 import React from "react";
 import HomepageInfo from "../components/HomepageInfo";
 import KeyFeatures from "../components/KeyFeatures";
-import MainHomeContent from "../components/MainHomeContent";
+import { motion } from "framer-motion";
 
 function Home() {
   return (
@@ -11,7 +11,7 @@ function Home() {
         <div className="d-flex row w-100 mx-auto justify-content-center">
           <div className="col-lg-12 col-md-12 d-flex flex-column align-items-center justify-content-between mb-5">
             <div className="d-flex flex-column align-items-center">
-              <h1 className="fw-medium text-light hero-title hero-title">
+              <h1 className="fw-medium text-light hero-title hero-title display-1">
                 Forget your passwords
               </h1>
               <h3 className="text-light">Because LockSmith won't.</h3>
@@ -30,8 +30,12 @@ function Home() {
             </p> */}
           </div>
           <div className="col-lg-6 col-md-12 d-flex flex-column">
-            <HomepageInfo />
-            <KeyFeatures />
+            <motion.div whileHover={{ scale: 1.05 }}>
+              <HomepageInfo />
+            </motion.div>
+            <motion.div whileHover={{ scale: 1.05 }}>
+              <KeyFeatures />
+            </motion.div>
           </div>
         </div>
       </div>

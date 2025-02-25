@@ -106,16 +106,16 @@ function Dashboard() {
     </div>
   ) : (
     <>
-      <div className="d-flex flex-column flex-md-row flex-grow-1 mh-100">
+      <div className="d-flex flex-column flex-grow-1 mh-100">
         <div className="d-flex rounded p-3 passwords-list flex-grow-1 shadow bg-body">
-          <div className="d-flex flex-column mh-100 mx-auto w-lg-100 w-50">
-            <div className="d-flex w-100 justify-content-between align-items-center mb-2">
+          <div className="d-flex flex-column mx-auto w-50 dashboard-container">
+            <div className="d-flex w-100 justify-content-between align-items-center mb-2 dashboard-title-items">
               <h3 className="mb-0">Accounts</h3>
               <p className="mb-0">
                 Total Passwords: <span>{filteredPasswords.length}</span>
               </p>
               <button
-                className="btn btn-primary text-nowrap"
+                className="btn btn-primary text-nowrap dashboard-button"
                 onClick={handleAddingPassword}
               >
                 <i className="fa-solid fa-plus me-2"></i>New Item
