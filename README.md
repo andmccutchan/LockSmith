@@ -13,7 +13,7 @@ LockSmith is a **secure and intuitive password management application** built us
 
 ## 🛠️ Technologies Used
 
-- **Frontend**: React.js, Tailwind CSS (or other styling framework)
+- **Frontend**: React.js, BootStrap, Framer Motion
 - **Backend**: Node.js, Express.js
 - **Database**: MongoDB (with Mongoose ORM)
 - **Authentication**: JWT (JSON Web Tokens)
