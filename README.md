@@ -22,4 +22,4 @@ LockSmith is a **secure and intuitive password management application** built us
 ## 📌 View Project Here
 
 [Live Link](https://locksmith.onrender.com/)
-Please a few minutes to load if you are logging in as I am using a free plan to host this site.
+ Please allow a few minutes to load if you are logging in as I am using a free plan to host this site.
